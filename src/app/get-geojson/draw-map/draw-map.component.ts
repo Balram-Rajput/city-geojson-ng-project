@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChange, ViewChild } from '@angular/core';
+import { Component, OnInit, SimpleChange, ViewChild,HostListener } from '@angular/core';
 import { GeojsonService } from '../geojson.service';
 import * as turf from "@turf/turf";
 import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
@@ -31,14 +31,27 @@ export class DrawMapComponent implements OnInit {
   FeatureData: any
   TehsilProperties = []
 
+  mobileView
+
 
   @ViewChild('sidenav', { static: true }) sidenav: MatSidenav
 
 
+  screenWidth
+  screenHeight
+  @HostListener('window:resize', ['$event'])  
+  onResize(event) {  
+    this.screenWidth = window.innerWidth;  
+    this.screenHeight = window.innerHeight;  
+  }
 
   constructor(private GeoService: GeojsonService, private mapHelperService: MaphelperService,
-    private MatDialog: MatDialog) { }
+    private MatDialog: MatDialog) { 
+     this.screenWidth =  window.innerWidth
+    }
 
+
+    
 
   ngOnInit(): void {
     console.log(this.GlobalGeometry)

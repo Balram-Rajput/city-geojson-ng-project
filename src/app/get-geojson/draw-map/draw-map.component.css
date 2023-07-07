@@ -1,13 +1,16 @@
 .mat-card{
     background-color: #3169b1;
-    border-radius: 0;
+    border-radius: 14px 14px 0 0;
     color: white;
-    font-family: cursive;
-    font-size: 20px;
+    /* font-family: cursive; */
+    font-size: 18px;
+    display: flex;
+    align-items: center;
 }
 
 .mat-card .mat-icon{
-    font-size: 29px;
+    font-size: 23px;
+    padding-left: 15px;
 }
 
 
@@ -293,7 +296,8 @@
     background-color: #f5f4f4;
     padding: 15px;
     height: calc(100% - 40px);
-    width: 100%;
+    border-radius: 0 0 14px 14px;
+    /* width: 100%; */
 }
 
 .load-div{
@@ -385,4 +389,51 @@ td{
   top: 44px !important;
   left: 35% !important;
   width: 60% !important;
+}
+
+.dropdown-block{
+  position: absolute;
+  /* width: 50%; */
+  top: 0;
+  z-index: 100;
+  right: 0;
+  margin: 11px 11px;
+  width: 20%;
+}
+.zindex{
+  z-index: 999 !important;
+}
+
+
+/* Mobile view class (mbv) */
+.dropdown-block-mbv{
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  right: 0;
+  /* margin: 11px 11px; */
+  /* width: 20%; */
+}
+
+.mat-card-mbv{
+  background-color: #3169b1;
+  border-radius: none !important;
+  color: white;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  padding: 10px !important;
+}
+
+#load-data-wrapper-mbv{
+  display: block;
+  background-color: #f5f4f4;
+  padding: 15px;
+  height: calc(100% - 40px);
+  border-radius: 0 0 14px 14px;
+  /* width: 100%; */
+}
+
+.load-div-mbv{
+
 }

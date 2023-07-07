@@ -1,0 +1,28 @@
+<div class="container" >
+    <!-- <div >
+      <p>Write the name of file</p>
+      <mat-form-field appearance="fill">
+        <mat-label>KML File</mat-label>
+        <input matInput [(ngModel)]="fileName">
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-raised-button color="primary" (click)="exportKML()" >Export KML</button>
+      <button mat-raised-button color="primary" (click)="onNoClick()">Close</button>
+    </div> -->
+
+    <h4>{{fileName}}</h4>
+      <div>
+        <select   class="inputType" [(ngModel)]="DownloadExtension" [value]="'KML'" (ngModelChange)=OnChangeDownloadEx($event) >
+          <option value="KML">KML</option>
+          <option value="GeoJson">GeoJson</option>
+        </select>
+      </div>
+
+      <div>
+        <button (click)="ClickDownload()" class="authButton" >
+          Download {{DownloadExtension}}
+        </button>
+      </div>
+
+</div>

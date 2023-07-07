@@ -1,0 +1,316 @@
+<mat-drawer-container class="example-container">
+
+  <mat-drawer-content>
+    <mat-sidenav-container class="example-container" [hasBackdrop]="false">
+
+      <!-- District Level Data -->
+      <mat-sidenav #sidenav mode="over" closed class="mat-sidebox">
+
+
+        <div *ngIf="GlobalGeometry.length > 0" class="matbox">
+
+          <!-- Heading -->
+          <header class="download-city">
+            <h2 class="city">{{GlobalGeometry[0].properties.dist_name}}
+            </h2>
+            <div style="padding-top: 6px;" >
+              <mat-icon matTooltip="Download {{GlobalGeometry[0].properties.pc_name}} Data"
+              matTooltipClass="my-custom-tooltip"
+              (click)="OnDownloadDistrictData(GlobalGeometry[0].properties.pc_name,GlobalGeometry)">download</mat-icon>
+
+            <mat-icon  matTooltip="Zoom to District" matTooltipClass="my-custom-tooltip"
+              (click)="ZoomToDistrict()">
+              <span class="material-symbols-outlined">
+                zoom_in
+              </span>
+            </mat-icon>
+            <mat-icon matTooltip="Edit District Data" (click)="EditDistrictData('edit_district_list',GlobalGeometry)"
+              matTooltipClass="my-custom-tooltip">
+              <span class="material-symbols-outlined">
+                edit_square
+              </span>
+            </mat-icon>
+
+            <mat-icon (click)="CloseCityNav()">close</mat-icon>
+            </div>
+          </header>
+
+          <div *ngIf="DistrictMode == 'view_disctrict_data' " class="main-body" >
+
+
+            <table class="citytable" *ngIf="!EditTehsilMode">
+              <tr *ngFor="let tehsil of GlobalGeometry; let index=index" class="tehsil" id="{{tehsil.properties.ac_name}}"  >
+
+                <td>
+                  <span class="custom-input custom-input-color">  
+                    <div [style.background]="tehsil.properties.color" class="color-div"></div>
+                  </span>
+                </td>
+
+                <td class="fw-6"   [style.background]="FeatureData?.ac_name == tehsil.properties.ac_name ? 'gray' : '' " >
+                  {{tehsil.properties.ac_name}}
+                </td>
+
+                <td>
+                  <mat-icon class="pointer pl-5" (click)="ViewTehshil(tehsil.geometry.coordinates)"><span
+                      class="material-symbols-outlined">
+                      visibility</span></mat-icon>
+                </td>
+
+                <td>
+                  <mat-icon class="pointer pl-5" (click)="EditTehsil(tehsil.properties,index)"><span
+                      class="material-symbols-outlined">
+                      description</span></mat-icon>
+                </td>
+              </tr>
+              
+            </table>
+            
+            <div *ngIf="EditTehsilMode">
+              <h5>{{EditedTehsilValue.ac_name}}
+                <mat-icon (click)="ReadMode != ReadMode" >edit</mat-icon>
+                <mat-icon>add</mat-icon>
+              </h5>
+              
+                <table class="citytable" >
+                  <!-- *ngIf="key != 'st_name' && key != 'st_name' " -->
+                  <tr *ngFor="let key of EditedTehsilKey"  >
+                    <td>{{key}}</td>
+                    <td> 
+                      <input [disabled]="ReadMode" type="text"  [(ngModel)]="EditedTehsilValue[key]" ></td>
+                      <!-- <input *ngIf="ReadMode" type="text"  [(ngModel)]="EditedTehsilValue[key]" ></td> -->
+                    <td *ngIf="!ReadMode" >
+                      <mat-icon>delete</mat-icon>
+                    </td>
+                  </tr>
+                </table>
+
+ 
+
+            </div>
+
+
+          </div>
+
+          <div *ngIf="DistrictMode === 'edit_district_list' " class="main-body" >
+
+            <div class="save-data-btn">
+              <mat-icon (click)="SaveDistrictLevelData()" >save</mat-icon>
+              <button class="authButton" (click)="DistrictMode = 'view_disctrict_data' ">
+                Cancel
+              </button>
+              <!-- <mat-icon (click)="DistrictMode = 'view_disctrict_data' " >back</mat-icon> -->
+              <!-- <button class="authButton" (click)="SaveDistrictLevelData()">
+                Save
+              </button>
+              <button class="authButton" (click)="DistrictMode = 'view_disctrict_data' ">
+                Cancel
+              </button> -->
+            </div>
+
+            <div *ngFor="let data of CopyGlobalGeometry; let i = index;"  >
+              <div class="edit-dist">
+                <input type="text" [(ngModel)]="CopyGlobalGeometry[i].properties.ac_name" class="cabin">
+
+                <div class="fillpaint" [style.background]="CopyGlobalGeometry[i].properties.color"
+                  [cpCancelButton]="true" [cpCancelButtonClass]="'btn btn-primary btn-xs'"
+                  [(colorPicker)]="CopyGlobalGeometry[i].properties.color" [cpOKButton]="true">
+
+                  <mat-icon class="pointer"  [style.color]="CopyGlobalGeometry[i].properties.color">format_color_fill</mat-icon>
+                </div>
+
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+
+
+
+      </mat-sidenav>
+      <!-- End District Level Data -->
+
+      <mat-sidenav-content>
+
+        <div id="geocoder" *ngIf="!ShowSearchBox" (click)="ShowSearchBox=true">
+          <mat-icon>search</mat-icon>
+        </div>
+
+        <div *ngIf="ShowSearchBox" class="example-form-field">
+          <input type="text" [(ngModel)]="searchGeo" (keyup.enter)="addInput()">
+          <button (click)="ShowSearchBox=false">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <div *ngIf="IsGeoLocationList" class="geo-data">
+          <mat-list role="list">
+
+            <mat-list-item role="listitem" *ngFor="let data of GeoLocationListData">
+
+              <div class="matlist" (click)="OnClickLocation(data)">
+                <mat-icon>location_on</mat-icon>
+                {{data.properties.display_name}}
+              </div>
+
+              <mat-divider></mat-divider>
+            </mat-list-item>
+
+          </mat-list>
+
+        </div>
+
+        <div class="tool-menu-arrow" *ngIf="GlobalGeometry.length > 0" (click)="sidenav.toggle()">
+          <mat-icon>
+            <span class="material-symbols-outlined">
+              chevron_right</span>
+          </mat-icon>
+        </div>
+
+        <app-map-common (DrawEmit)="DrawEmit($event)" (EmitMap)="RecivedMap($event)" [map]="map"></app-map-common>
+
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+
+
+
+  </mat-drawer-content>
+
+
+  <mat-drawer mode="side" opened style="width: 19%;" position="end">
+    <mat-card class="mat-card">
+      <mat-icon>
+        architecture
+      </mat-icon>
+      Draw Your Area
+    </mat-card>
+
+    <!-- <button mat-raised-button (click)="sidenav.toggle()">Toggle drawer</button> -->
+
+    <section>
+      <div id="load-data-wrapper">
+        <div class="load-div">
+          <!-- <h4>Select Country :</h4> -->
+          <div>
+            <mat-form-field>
+
+              <mat-select class="cabin" [(ngModel)]="selectedCountry" [value]="'India'"
+                (ngModelChange)=OnSelectedCountry($event) placeholder="Select Country">
+                <mat-option value="India">India</mat-option>
+                <mat-option value="USA">USA</mat-option>
+                <mat-option value="UK">United Kingdom (UK) </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- <h4 class="mt-5" >Select State :</h4> -->
+          <!-- <div> -->
+          <!-- <select class="inputType" name="cars" id="cars">
+              <option value="India">India</option>
+              <option value="USA">USA</option>
+              <option value="UK">United Kingdom (UK) </option>
+            </select> -->
+          <!-- </div> -->
+
+          <mat-form-field>
+            <mat-select class="cabin" [disableOptionCentering]="true" #select1 placeholder="Select State"
+              (selectionChange)="StateSelection($event)">
+              <mat-select-filter *ngIf="select1.focused" [displayMember]="'state'" [array]="StateAndDistrictData"
+                (filteredReturn)="filteredList1 = $event"></mat-select-filter>
+              <mat-option *ngFor="let item of filteredList1; let i = index;" [value]="item">
+                {{ item.state }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- <h4 class="mt-5" >Select District :</h4> -->
+          <br>
+          <mat-form-field>
+            <mat-select class="cabin" [disableOptionCentering]="true" #select2 placeholder="Select District"
+              (selectionChange)="DistrictSelection($event)" [disabled]="IsHideDistrictTable">
+              <mat-select-filter *ngIf="select2.focused" [array]="SelectedDistrictData"
+                (filteredReturn)="filteredList2 = $event"></mat-select-filter>
+              <mat-option *ngFor="let value of filteredList2" [value]="value">
+                {{ value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <br>
+
+          <!-- <button class="authButton">
+            Submit
+          </button> -->
+
+        </div>
+
+
+
+
+      </div>
+    </section>
+
+    <!-- <section class="mt-5">
+
+      <mat-grid-list cols="3" rowHeight="50px">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <div class="box" (click)="DrawOnMap('reactangle')">
+            <img src="../../../assets/img/square.png" class="img" alt="">
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <div class="box">
+            <mat-icon>polyline</mat-icon>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <div class="box">
+            <mat-icon>
+              <span class="material-symbols-outlined">
+                square
+              </span>
+            </mat-icon>
+          </div>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+      <mat-grid-list cols="3" rowHeight="50px">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <div class="box">
+            <mat-icon>draw</mat-icon>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <div class="box">
+            <mat-icon>polyline</mat-icon>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <div class="box">
+            <mat-icon>
+              <span class="material-symbols-outlined">
+                square
+              </span>
+            </mat-icon>
+          </div>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </section> -->
+
+
+
+
+
+  </mat-drawer>
+</mat-drawer-container>

@@ -1,0 +1,53 @@
+.container {
+    /* padding: 30px; */
+}
+
+.mt-5{
+    margin-top: 15px;
+}
+
+h4{
+    font-family: 'Cabin';
+    /* font-family: 'Montserrat'; */
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.inputType{
+    display: block;
+    /* width: calc(100% - 110px); */
+    width: 100%;
+    padding: 0 10px;
+    color: inherit;
+    font-size: inherit;
+    background: #e4e6e9;
+    border: 1px solid #e4e6e9;
+    text-align: inherit;
+    border-color: #babcc4;
+    height: 40px;
+    font-weight: 400;
+    font-family:'Cabin'!important; 
+}
+
+.authButton{
+    background-color: #05904e;
+    border: #00000000;
+    font-size: 12px;
+    cursor: pointer;
+    color: white;
+    font-weight: 700;
+    padding: 8px 14px;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    /* width: 95px; */
+    -webkit-user-select: none;
+    user-select: none;
+    height: 40px;
+    border-radius: 2px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    font-family: 'Montserrat';
+    margin-top: 16px;
+}

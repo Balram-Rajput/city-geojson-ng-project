@@ -1,6 +1,6 @@
 <mat-sidenav-container class="example-container" [hasBackdrop]="false">
 
-  <mat-sidenav #sidenav mode="over" closed class="mat-sidebox">
+  <mat-sidenav #sidenav mode="over" closed class="mat-sidebox" [ngClass]="screenWidth < 760 ? 'mobile-sidenave' : '' " >
 
     <div *ngIf="GlobalGeometry.length > 0" class="matbox">
 
@@ -171,7 +171,7 @@
 
 </mat-sidenav-container>
 
-<!-- web view -->
+<!-- web view sidebar -->
 <section class="dropdown-block" *ngIf="screenWidth > 760">
   <mat-card class="mat-card">
     <mat-icon>
@@ -197,15 +197,6 @@
           </mat-select>
         </mat-form-field>
       </div>
-
-      <!-- <h4 class="mt-5" >Select State :</h4> -->
-      <!-- <div> -->
-      <!-- <select class="inputType" name="cars" id="cars">
-              <option value="India">India</option>
-              <option value="USA">USA</option>
-              <option value="UK">United Kingdom (UK) </option>
-            </select> -->
-      <!-- </div> -->
 
       <mat-form-field>
         <mat-select class="cabin" [disableOptionCentering]="true" #select1 placeholder="Select State"
@@ -246,7 +237,7 @@
 </section>
 
 
-<!-- mobile view -->
+<!-- mobile view sidebar -->
 <section class="dropdown-block-mbv" *ngIf="screenWidth < 759">
   <mat-card class="mat-card-mbv">
     <!-- <mat-icon>
@@ -254,11 +245,25 @@
         search
       </span>
     </mat-icon> -->
-    Search City Mobile Data
+    
+      <span>
+        Search City Data
+      </span>
+      <mat-icon *ngIf="!toogleMobileDrop"  (click)="toogleMobileDrop =true;" >
+        <span class="material-symbols-outlined">
+            expand_more
+          </span>
+      </mat-icon>
+
+      <mat-icon *ngIf="toogleMobileDrop"  (click)="toogleMobileDrop = false;" >
+        <span class="material-symbols-outlined">
+            expand_less
+          </span>
+      </mat-icon>
   </mat-card>
 
 
-  <div id="load-data-wrapper-mbv">
+  <div id="load-data-wrapper-mbv" *ngIf="toogleMobileDrop" >
     <div class="load-div-mbv">
       <!-- <h4>Select Country :</h4> -->
       <div>
@@ -299,10 +304,6 @@
       </mat-form-field>
 
       <br>
-
-      <!-- <button class="authButton">
-            Submit
-          </button> -->
 
     </div>
 

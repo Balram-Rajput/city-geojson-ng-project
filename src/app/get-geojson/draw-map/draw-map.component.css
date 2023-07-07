@@ -94,7 +94,7 @@
 
 
 .mat-sidebox{
-    width: 30%;
+    width: 20%;
     height: 56%;
     bottom: 5px;
     margin-top: auto;
@@ -417,12 +417,13 @@ td{
 
 .mat-card-mbv{
   background-color: #3169b1;
-  border-radius: none !important;
+  border-radius: unset !important;
   color: white;
-  font-size: 11px;
+  font-size: 13px;
   display: flex;
   align-items: center;
-  padding: 10px !important;
+  justify-content: space-between;
+  padding: 10px 40px !important;
 }
 
 #load-data-wrapper-mbv{
@@ -436,4 +437,10 @@ td{
 
 .load-div-mbv{
 
+}
+.mobile-sidenave{
+  width: 78% !important;
+}
+.web-sidenave{
+  width: 78% !important;
 }

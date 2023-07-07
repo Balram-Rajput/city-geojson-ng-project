@@ -74,6 +74,30 @@ export class MaphelperService {
 
   addLayerBehavior(map, id) {
 
+     // Modify the touch event listeners
+     map.on('touchend',id, (e)=> {
+
+      if (e.originalEvent.type === 'touchend') {
+         console.log('touch event...')
+        e.preventDefault();
+
+        if (e && e.features) {
+
+          console.log(e.features[0].properties)
+          // let propertiesData = e.features[0].properties
+          let FeatureData = e.features[0]
+          map.features = e.features[0];
+          this.FeatureModalSideNave.emit(FeatureData.properties)
+          this.OnClickHighlightedLayer(map, e, id)
+          this.OpenPopup(e, map, FeatureData)
+  
+        }
+        // Handle touch event logic here
+      } else {
+        // Handle mouse click logic here
+      }
+    });
+
     //Layer Behaviour 
     map.on('mouseenter', 'maine', () => {
       map.getCanvas().style.cursor = 'pointer';
@@ -96,10 +120,13 @@ export class MaphelperService {
         this.OnClickHighlightedLayer(map, e, id)
         this.OpenPopup(e, map, FeatureData)
 
-
       }
 
     })
+
+ 
+    
+   
   }
 
   SetCategoryStyle(map,GlobalGeometry){

@@ -38,11 +38,12 @@ export class DrawMapComponent implements OnInit {
 
 
   screenWidth
-  screenHeight
+  toogleMobileDrop =true
+
+
   @HostListener('window:resize', ['$event'])  
   onResize(event) {  
     this.screenWidth = window.innerWidth;  
-    this.screenHeight = window.innerHeight;  
   }
 
   constructor(private GeoService: GeojsonService, private mapHelperService: MaphelperService,
@@ -1003,7 +1004,8 @@ export class DrawMapComponent implements OnInit {
   }
 
   DistrictSelection(event: any) {
-    this.OnClickLocation(event.value)
+    this.toogleMobileDrop=false
+    this.OnClickLocation(event.value) 
   }
 
   //End Right SideNave

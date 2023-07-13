@@ -180,7 +180,7 @@
     background: black;
     display: flex;
     justify-content: space-between;
-    padding: 10px 0px 3px 9px;
+    padding: 10px 0px 3px 9px !important;
     align-items: center;
     position: sticky;
     margin: 0;
@@ -254,12 +254,12 @@
 
   .save-data-btn{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     /* padding-bottom: 23px; */
     position: relative;
     bottom: 0;
     width: 100%;
-    background: gray;
+    /* background: gray; */
   }
 
   .m-0{
@@ -443,4 +443,26 @@ td{
 }
 .web-sidenave{
   width: 78% !important;
+}
+
+.active-tehsil{
+      /* background: gray; */
+      text-decoration: underline;
+      font-weight: 800 !important;
+      /* font-size: 11px; */
+      color: red;
+}
+
+.edit-th-mode-h{
+  display: flex;
+  align-items: center;
+  /* justify-content: space-evenly; */
+  font-size: 13px;
+  font-weight: 500;
+}
+.pl-15{
+  padding-left:15px ;
+}
+.pr-15{
+  padding-right:15px ;
 }

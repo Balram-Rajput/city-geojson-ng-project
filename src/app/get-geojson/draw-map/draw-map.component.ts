@@ -60,6 +60,7 @@ export class DrawMapComponent implements OnInit {
       if (result) {
         this.FeatureData = result;
         this.sidenav.open()
+        this.EditTehsilMode = false
         
         setTimeout(() => {
           this.gotoscorlled(result.ac_name)

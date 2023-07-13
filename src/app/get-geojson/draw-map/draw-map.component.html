@@ -41,7 +41,7 @@
               </span>
             </td>
 
-            <td class="fw-6" [style.background]="FeatureData?.ac_name == tehsil.properties.ac_name ? 'gray' : '' ">
+            <td class="fw-6" [ngClass]="FeatureData?.ac_name == tehsil.properties.ac_name ? 'active-tehsil' : '' ">
               {{tehsil.properties.ac_name}}
             </td>
 
@@ -61,9 +61,19 @@
         </table>
 
         <div *ngIf="EditTehsilMode">
-          <h5>{{EditedTehsilValue.ac_name}}
-            <mat-icon (click)="ReadMode != ReadMode">edit</mat-icon>
-            <mat-icon>add</mat-icon>
+          <!-- <button class="authButton" (click)="EditTehsilMode =false">
+            Back
+          </button> -->
+          <h5 class="edit-th-mode-h" >
+              <mat-icon class="pointer pr-15" (click)="EditTehsilMode =false" ><span class="material-symbols-outlined">
+                arrow_back
+                </span>
+              </mat-icon>
+              <span>
+                {{EditedTehsilValue.ac_name}}
+              </span>
+            <!-- <mat-icon (click)="ReadMode != ReadMode">edit</mat-icon> -->
+            <!-- <mat-icon>add</mat-icon> -->
           </h5>
 
           <table class="citytable">
@@ -90,10 +100,20 @@
       <div *ngIf="DistrictMode === 'edit_district_list' " class="main-body">
 
         <div class="save-data-btn">
-          <mat-icon (click)="SaveDistrictLevelData()">save</mat-icon>
-          <button class="authButton" (click)="DistrictMode = 'view_disctrict_data' ">
+          <mat-icon  matTooltip="Save Data"
+          matTooltipClass="my-custom-tooltip" class="pointer pl-15" (click)="SaveDistrictLevelData()">
+          save</mat-icon>
+
+          <mat-icon class="pointer" (click)="DistrictMode = 'view_disctrict_data' "
+          matTooltip="Close"
+          matTooltipClass="my-custom-tooltip">
+            <span class="material-symbols-outlined">
+              cancel
+              </span>
+          </mat-icon>
+          <!-- <button class="authButton" (click)="DistrictMode = 'view_disctrict_data' ">
             Cancel
-          </button>
+          </button> -->
           <!-- <mat-icon (click)="DistrictMode = 'view_disctrict_data' " >back</mat-icon> -->
           <!-- <button class="authButton" (click)="SaveDistrictLevelData()">
                 Save
@@ -243,7 +263,6 @@
     <!-- <mat-icon>
       <span class="material-symbols-outlined">
         search
-      </span>
     </mat-icon> -->
     
       <span>

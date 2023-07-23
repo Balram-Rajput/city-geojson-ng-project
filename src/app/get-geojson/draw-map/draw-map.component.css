@@ -466,3 +466,21 @@ td{
 .pr-15{
   padding-right:15px ;
 }
+
+.link-img{
+  width: 20px;
+  height: 20px;
+}
+
+.dflex{
+  display: flex;
+}
+.flex-end{
+  align-items: flex-end;
+}
+
+ a{
+  color: #3375b2;
+  font-weight: 800;
+  text-decoration: none;
+}

@@ -32,6 +32,7 @@ export class DrawMapComponent implements OnInit {
   TehsilProperties = []
 
   mobileView
+  ViewLinkedInPro:any = false
 
 
   @ViewChild('sidenav', { static: true }) sidenav: MatSidenav

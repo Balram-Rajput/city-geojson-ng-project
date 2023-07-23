@@ -6,7 +6,8 @@
 
       <!-- Heading -->
       <header class="download-city">
-        <h2 class="city">{{GlobalGeometry[0].properties.dist_name}}
+        <h2 class="city">{{GlobalGeometry[0].properties.dist_name}} 
+           ({{GlobalGeometry.length}})
         </h2>
         <div style="padding-top: 6px;">
           <mat-icon matTooltip="Download {{GlobalGeometry[0].properties.pc_name}} Data"
@@ -248,10 +249,15 @@
             Submit
           </button> -->
 
+
     </div>
 
-
-
+              
+    <div class="dflex flex-end" >
+      <img class="link-img" src="assets/img/linkedin.png" alt="linkedin"
+      (click)="ViewLinkedInPro = true">
+      <a href="https://www.linkedin.com/in/balram-rajput-a15782191/" target="_blank">@Balram-Rajput</a>
+    </div>
 
   </div>
 </section>
@@ -326,7 +332,11 @@
 
     </div>
 
-
+    <div class="dflex flex-end" >
+      <img class="link-img" src="assets/img/linkedin.png" alt="linkedin"
+      (click)="ViewLinkedInPro = true">
+      <a href="https://www.linkedin.com/in/balram-rajput-a15782191/" target="_blank">@Balram-Rajput</a>
+    </div>
 
 
   </div>

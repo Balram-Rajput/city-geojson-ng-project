@@ -484,3 +484,16 @@ td{
   font-weight: 800;
   text-decoration: none;
 }
+
+.link-img-mb{
+  width: 15px;
+  height: 15px;
+}
+
+
+.al-center{
+  align-items: center;
+}
+.ft-sm{
+  font-size: 11px;
+}

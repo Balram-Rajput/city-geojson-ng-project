@@ -996,17 +996,21 @@ export class DrawMapComponent implements OnInit {
 
   SelectedDistrictData
   IsHideDistrictTable = true
+  StateValue:any
   StateSelection(event: any) {
     console.log(event)
     this.SelectedDistrictData = event.value.city
     this.filteredList2 = this.SelectedDistrictData
+    this.StateValue = event.value;
     this.IsHideDistrictTable = false
     // this.CloseCityNav()
     this.sidenav.close()
   }
 
+  DistrictValue:any
   DistrictSelection(event: any) {
     this.toogleMobileDrop=false
+    this.DistrictValue = event.value;
     this.OnClickLocation(event.value) 
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dummy',
@@ -11,7 +12,15 @@ export class DummyComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    this.mySubject.next('balram')
+    this.mySubject.subscribe(val=>{
+      console.log(val)
+    })
   }
+
+  mySubject = new Subject()
+
+  obs = new Observable()
 
   download(content, fileName, contentType) {
     var a = document.createElement("a");

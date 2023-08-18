@@ -213,8 +213,8 @@
           <mat-select class="cabin zindex" [(ngModel)]="selectedCountry" [value]="'India'"
             (ngModelChange)=OnSelectedCountry($event) placeholder="Select Country">
             <mat-option value="India">India</mat-option>
-            <mat-option value="USA">USA</mat-option>
-            <mat-option value="UK">United Kingdom (UK) </mat-option>
+            <!-- <mat-option value="USA">USA</mat-option>
+            <mat-option value="UK">United Kingdom (UK) </mat-option> -->
           </mat-select>
         </mat-form-field>
       </div>
@@ -297,8 +297,8 @@
           <mat-select class="cabin zindex" [(ngModel)]="selectedCountry" [value]="'India'"
             (ngModelChange)=OnSelectedCountry($event) placeholder="Select Country">
             <mat-option value="India">India</mat-option>
-            <mat-option value="USA">USA</mat-option>
-            <mat-option value="UK">United Kingdom (UK) </mat-option>
+            <!-- <mat-option value="USA">USA</mat-option>
+            <mat-option value="UK">United Kingdom (UK) </mat-option> -->
           </mat-select>
         </mat-form-field>
       </div>
@@ -306,7 +306,7 @@
 
       <mat-form-field>
         <mat-select class="cabin" [disableOptionCentering]="true" #select1 placeholder="Select State"
-          (selectionChange)="StateSelection($event)">
+          (selectionChange)="StateSelection($event)" [value]="StateValue" >
           <mat-select-filter *ngIf="select1.focused" [displayMember]="'state'" [array]="StateAndDistrictData"
             (filteredReturn)="filteredList1 = $event"></mat-select-filter>
           <mat-option *ngFor="let item of filteredList1; let i = index;" [value]="item">
@@ -318,8 +318,9 @@
       <!-- <h4 class="mt-5" >Select District :</h4> -->
       <br>
       <mat-form-field>
+        <!-- [disabled]="IsHideDistrictTable" -->
         <mat-select class="cabin" [disableOptionCentering]="true" #select2 placeholder="Select District"
-          (selectionChange)="DistrictSelection($event)" [disabled]="IsHideDistrictTable">
+          (selectionChange)="DistrictSelection($event)" [value]="DistrictValue" >
           <mat-select-filter *ngIf="select2.focused" [array]="SelectedDistrictData"
             (filteredReturn)="filteredList2 = $event"></mat-select-filter>
           <mat-option *ngFor="let value of filteredList2" [value]="value">

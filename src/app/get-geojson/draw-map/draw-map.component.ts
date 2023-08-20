@@ -1117,6 +1117,12 @@ export class DrawMapComponent implements OnInit {
   //End District Side Nave
 
 
+  OnScrollTop(){
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Use 'auto' for instant scroll, 'smooth' for smooth scroll
+    });
+  }
 
 
 

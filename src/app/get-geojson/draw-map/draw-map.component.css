@@ -497,3 +497,22 @@ td{
 .ft-sm{
   font-size: 11px;
 }
+
+.up-box{
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  /* z-index: 9999; */
+  /* left: 50px; */
+  display: flex;
+  text-align: center;
+  width: 100%;
+  justify-content: center;
+}
+.arrow-up{
+
+  z-index: 999;
+  background: white;
+  border-radius: 2px;
+  padding: 3px;
+}

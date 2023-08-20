@@ -149,7 +149,16 @@
   </mat-sidenav>
 
 
+
+
   <mat-sidenav-content>
+
+    <div class="up-box" *ngIf="screenWidth < 759" >
+      <mat-icon class="arrow-up" (click)="OnScrollTop()" >
+        <span class="material-symbols-outlined">
+        arrow_upward
+        </span></mat-icon>
+    </div>
 
     <div id="geocoder" *ngIf="!ShowSearchBox" (click)="ShowSearchBox=true">
       <mat-icon>search</mat-icon>
@@ -311,7 +320,7 @@
             (filteredReturn)="filteredList1 = $event"></mat-select-filter>
           <mat-option *ngFor="let item of filteredList1; let i = index;" [value]="item">
             {{ item.state }}
-          </mat-option>
+          </mat-option> 
         </mat-select>
       </mat-form-field>
 

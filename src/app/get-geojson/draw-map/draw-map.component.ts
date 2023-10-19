@@ -158,30 +158,30 @@ export class DrawMapComponent implements OnInit {
 
   // }
 
-  OnClickLocation(display_name) {
+  OnClickLocation(ServerData) {
 
     this.GlobalGeometry = []
     this.boudingCoordinates = []
     this.TehsilProperties = []
 
-    this.GeoService.getGeoJsonBoundries.features.forEach(val => {
+    ServerData.forEach(val => {
       if (val.properties.dist_name) {
 
-        if (val.properties.dist_name === display_name) {
+        // if (val.properties.dist_name === display_name) {
           console.log(val.geometry)
-          this.boudingCoordinates.push(val.geometry.coordinates[0])
+          this.boudingCoordinates.push(val.geometry.coordinates)
 
           val.properties['color'] = "#0080ff"
-          let create_geojson = {
-            "type": "Feature",
-            "properties": val.properties,
-            "geometry": {
-              "type": "Polygon",
-              "coordinates": val.geometry.coordinates[0]
-            }
-          }
-          this.GlobalGeometry.push(create_geojson)
-        }
+          // let create_geojson = {
+          //   "type": "Feature",
+          //   "properties": val.properties,
+          //   "geometry": {
+          //     "type": "Polygon",
+          //     "coordinates": val.geometry.coordinates
+          //   }
+          // }
+          this.GlobalGeometry.push(val)
+        // }
 
       }
     })
@@ -1011,7 +1011,11 @@ export class DrawMapComponent implements OnInit {
   DistrictSelection(event: any) {
     this.toogleMobileDrop=false
     this.DistrictValue = event.value;
-    this.OnClickLocation(event.value) 
+    // this.OnClickLocation(event.value);
+    this.GeoService.IndiaDistrictGeojson(this.DistrictValue).subscribe(val=>{
+      console.log(val)
+      this.OnClickLocation(val.geoData)
+    }) 
   }
 
   //End Right SideNave

@@ -37,7 +37,7 @@ export class DrawMapComponent implements OnInit {
 
   @ViewChild('sidenav', { static: true }) sidenav: MatSidenav
 
-
+  myForm
   screenWidth
   toogleMobileDrop =true
 

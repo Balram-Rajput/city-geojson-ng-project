@@ -21,19 +21,25 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatSelectFilterModule } from 'mat-select-filter';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MultiselectDropdownComponent } from './multiselect-dropdown/multiselect-dropdown.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
   declarations: [
     DrawMapComponent,
     DummyComponent,
-    DownloadGeojsonDataComponent
+    DownloadGeojsonDataComponent,
+    MultiselectDropdownComponent
   ],
   imports: [
+    NgMultiSelectDropDownModule.forRoot(),
+
     CommonModule,
     GetGeojsonRoutingModule,
     CommonModuleModule,
     HttpClientModule,
+
 
     MatFormFieldModule,
     ColorPickerModule, 

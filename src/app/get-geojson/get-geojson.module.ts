@@ -23,7 +23,8 @@ import { MatSelectFilterModule } from 'mat-select-filter';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MultiselectDropdownComponent } from './multiselect-dropdown/multiselect-dropdown.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatSelectModule,
     MatToolbarModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    MatDividerModule
+    
 
     
   ]

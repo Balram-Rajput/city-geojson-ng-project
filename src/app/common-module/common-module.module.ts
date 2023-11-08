@@ -4,19 +4,18 @@ import { DrawToolsComponent } from './draw-tools/draw-tools.component';
 import { MapCommonComponent } from './map-common/map-common.component';
 import { MaphelperService } from './maphelper.service';
 import {MatDialogModule} from '@angular/material/dialog';
-
-
+import { NotificationBoxComponent } from './notification-box/notification-box.component';
 
 
 @NgModule({
   declarations: [  
     DrawToolsComponent,
-    MapCommonComponent
+    MapCommonComponent,
+    NotificationBoxComponent
   ],
   imports: [
     CommonModule,
-    MatDialogModule
-    
+    MatDialogModule,
   ],
   exports:[
     MapCommonComponent

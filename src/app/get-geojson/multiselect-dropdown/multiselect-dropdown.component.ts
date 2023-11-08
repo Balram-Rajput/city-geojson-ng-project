@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 
@@ -14,9 +14,10 @@ export class MultiselectDropdownComponent implements OnInit {
   public formGroup: FormGroup ;
   public loadContent: boolean = false;
   public name :any = 'Cricketers';
-  public data = [ ];
+  public SearchData = [];
   public settings:any = {};
   public selectedItems:any = [];
+
 
   ngOnInit() {
 
@@ -33,7 +34,7 @@ export class MultiselectDropdownComponent implements OnInit {
       clearSearchFilter: true,
       maxHeight: 197,
       itemsShowLimit: 5,
-      searchPlaceholderText: 'Search City',
+      searchPlaceholderText: 'Search City Ex: Mumbai',
       noDataAvailablePlaceholderText: 'No Data Available ',
       closeDropDownOnSelection: false,
       showSelectedItemsAtTop: false,
@@ -47,8 +48,8 @@ export class MultiselectDropdownComponent implements OnInit {
 
   public setForm() {
 
-    this.data = [
-      ...this.DistrictData.slice(0,5)
+    this.SearchData = [
+      ...this.DistrictData.slice(0,10)
     ];
 
     this.formGroup = new FormGroup({
@@ -61,12 +62,17 @@ export class MultiselectDropdownComponent implements OnInit {
     return this.formGroup.controls;
   }
 
-  public save() {
+  @Output() EmitSearchData:EventEmitter<any> = new EventEmitter()
+  public OnSubmitSearch() {
     if (this.formGroup.invalid) {
       this.formGroup.markAllAsTouched();
       return;
     }
-    console.log(this.formGroup.value);
+    let CityName:any = []
+    const finalData = this.formGroup.value.name
+    finalData.forEach(val=> CityName.push(val.item_text))
+    CityName = CityName.join(",")
+    this.EmitSearchData.emit(CityName)
   }
 
   public resetForm() {
@@ -80,14 +86,23 @@ export class MultiselectDropdownComponent implements OnInit {
 
 
   public onDropDownClose(item: any) {
-    console.log(item);
+    if(this.selectedItems.length > 0){
+        this.SearchData = this.selectedItems
+    }
   }
 
   public onItemSelect(item: any) {
-    console.log(item);
+    if(item){
+        this.selectedItems.push(item)
+    }
   }
+
   public onDeSelect(item: any) {
-    console.log(item);
+    let index = this.selectedItems.findIndex((a)=>a.item_id === item.item_id)
+    if(index != -1){
+        this.selectedItems.splice(index,1)
+    }
+    // console.log(this.selectedItems)
   }
 
   public onSelectAll(items: any) {
@@ -99,7 +114,6 @@ export class MultiselectDropdownComponent implements OnInit {
 
   searchTerms= new Subject<string>();
   public onFilterChange(item: any) {
-    console.log(item);
     this.searchTerms.next(item); // Push search term into the observable
   }
 
@@ -119,16 +133,17 @@ export class MultiselectDropdownComponent implements OnInit {
         })
       )
       .subscribe(results => { 
-        console.log(results);
+
         if(results.length == 0){
-          this.data = [...this.DistrictData.slice(0,5)]
+        //   this.SearchData = [...this.DistrictData.slice(0,5)]
         }else{
-          this.data =results
+          this.SearchData = results
         }
 
       });
   }
 
+ 
   DistrictData = [
     {
         "item_id": 0,
@@ -2487,6 +2502,8 @@ export class MultiselectDropdownComponent implements OnInit {
         "item_text": "BIRBHUM"
     }
 ]
+
+
 
 
 

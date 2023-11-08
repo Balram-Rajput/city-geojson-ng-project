@@ -1,16 +1,21 @@
 .mat-card{
-    background-color: #3169b1;
-    border-radius: 14px 14px 0 0;
+    background-color: #000;
+    /* border-radius: 14px 14px 0 0; */
     color: white;
     /* font-family: cursive; */
-    font-size: 18px;
+    font-size: 14px;
     display: flex;
     align-items: center;
+    padding: 9px !important;
+    font-family: 'Montserrat';
+    justify-content: center;
+    font-weight: 700;
+
 }
 
 .mat-card .mat-icon{
-    font-size: 23px;
-    padding-left: 15px;
+    /* font-size: 23px; */
+    padding-right: 15px;
 }
 
 
@@ -294,15 +299,15 @@
 #load-data-wrapper{
     display: block;
     background-color: #f5f4f4;
-    padding: 15px;
+    padding: 10px 15px;
     height: calc(100% - 40px);
     border-radius: 0 0 14px 14px;
     /* width: 100%; */
 }
 
 .load-div{
-    margin-top: 20px;
-    margin-bottom: 30px;
+    /* margin-top: 20px;
+    margin-bottom: 30px; */
     padding-bottom: 30px;
     border-bottom: 1px solid #dedede;
 }
@@ -351,6 +356,9 @@
     font-family: 'Cabin'!important;
 
 }
+:host ::ng-deep .mat-menu-panel{
+  min-width: 86px !important;
+}
 
 
 td{
@@ -397,8 +405,9 @@ td{
   top: 0;
   z-index: 100;
   right: 0;
-  margin: 11px 11px;
+  /* margin: 11px 11px; */
   width: 20%;
+  height: 100%;
 }
 .zindex{
   z-index: 999 !important;
@@ -515,4 +524,27 @@ td{
   background: white;
   border-radius: 2px;
   padding: 3px;
+}
+.flag-h{
+  height: 24px;
+}
+
+.flag-box{
+  justify-content: end;
+}
+.flex-start{
+  justify-content: start;
+}
+
+.multisearch{
+  border: 1px solid lightgray;
+  padding: 20px 16px;
+  border-radius: 7px;
+}
+
+.city-data{
+  padding-left: 15px;
+  text-decoration: underline;
+  font-family: Montserrat;
+  font-weight: 600;
 }

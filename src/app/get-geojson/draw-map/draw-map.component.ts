@@ -1,7 +1,7 @@
 import { Component, OnInit, SimpleChange, ViewChild,HostListener } from '@angular/core';
 import { GeojsonService } from '../geojson.service';
 import * as turf from "@turf/turf";
-import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
+import { MatSidenav } from '@angular/material/sidenav';
 import { MaphelperService } from 'src/app/common-module/maphelper.service';
 import { DownloadGeojsonDataComponent } from '../download-geojson-data/download-geojson-data.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -29,14 +29,11 @@ export class DrawMapComponent implements OnInit {
   GlobalGeometry = []
   boudingCoordinates = [];
   FeatureData: any
-  TehsilProperties = []
-
   mobileView
   ViewLinkedInPro:any = false
 
 
   @ViewChild('sidenav', { static: true }) sidenav: MatSidenav
-
   myForm
   screenWidth
   toogleMobileDrop =true
@@ -54,11 +51,14 @@ export class DrawMapComponent implements OnInit {
 
 
     
-
+  ActiveDistrictData
   ngOnInit(): void {
-    console.log(this.GlobalGeometry)
     this.mapHelperService.FeatureModalSideNave.subscribe(result => {
       if (result) {
+        let index = this.ServerData.findIndex((a)=>result.dist_name.includes(a.city))
+        if(index!= -1){
+          this.ActiveDistrictData = this.ServerData[index]
+        }
         this.FeatureData = result;
         this.sidenav.open()
         this.EditTehsilMode = false
@@ -162,34 +162,27 @@ export class DrawMapComponent implements OnInit {
 
     this.GlobalGeometry = []
     this.boudingCoordinates = []
-    this.TehsilProperties = []
+    
+    ServerData.geoData.forEach(result => {
+      for(let city_geo of result.geometry){
+        if (city_geo.properties.dist_name) {
 
-    ServerData.forEach(val => {
-      if (val.properties.dist_name) {
-
-        // if (val.properties.dist_name === display_name) {
-          console.log(val.geometry)
-          this.boudingCoordinates.push(val.geometry.coordinates)
-
-          val.properties['color'] = "#0080ff"
-          // let create_geojson = {
-          //   "type": "Feature",
-          //   "properties": val.properties,
-          //   "geometry": {
-          //     "type": "Polygon",
-          //     "coordinates": val.geometry.coordinates
-          //   }
-          // }
-          this.GlobalGeometry.push(val)
-        // }
-
+          this.boudingCoordinates.push(city_geo.geometry.coordinates)
+          city_geo.properties['color'] = "#0080ff"
+          this.GlobalGeometry.push(city_geo)
+  
+        }
       }
+      
     })
 
     this.CloseCityNav()
     if (this.GlobalGeometry.length > 0) {
       this.RemoveLayerSource(this.map)
-      this.AddLayerSource(this.map)
+      this.AddLayerSource(this.map);
+
+
+      this.ActiveDistrictData = this.ServerData[this.ServerData.length-1]
       this.sidenav.open()
 
     } else {
@@ -203,7 +196,6 @@ export class DrawMapComponent implements OnInit {
   }
 
   AddLayerSource(map) {
-    console.log(this.GlobalGeometry)
     this.map = this.mapHelperService.AddLayerOnMap(map, this.GlobalGeometry, this.boudingCoordinates)
     this.sidenav.close()
   }
@@ -1008,14 +1000,22 @@ export class DrawMapComponent implements OnInit {
   }
 
   DistrictValue:any
+  ServerData
   DistrictSelection(event: any) {
     this.toogleMobileDrop=false
-    this.DistrictValue = event.value;
+    this.DistrictValue = event;
     // this.OnClickLocation(event.value);
     this.GeoService.IndiaDistrictGeojson(this.DistrictValue).subscribe(val=>{
       console.log(val)
-      this.OnClickLocation(val.geoData)
+      this.ServerData = val.geoData
+      this.OnClickLocation(val)
+    },err=>{
+      // this.
     }) 
+  }
+
+  EmitSearchData(event){
+    this.DistrictSelection(event)
   }
 
   //End Right SideNave
@@ -1071,12 +1071,15 @@ export class DrawMapComponent implements OnInit {
     this.EditTehsilMode = false
   }
 
-  ZoomToDistrict() {
+  ZoomToDistrict(district_coordiantes) {
+    let final_cooridnates = district_coordiantes.map((geom)=>{
+      return geom.geometry.coordinates; 
+    }) 
     var bbox = turf.bbox({
       'type': 'Feature',
       'geometry': {
         'type': 'MultiPolygon',
-        'coordinates': this.boudingCoordinates
+        'coordinates': final_cooridnates
       }
     })
     this.map.fitBounds(bbox, { padding: 20 });

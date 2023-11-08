@@ -1,20 +1,20 @@
 <mat-sidenav-container class="example-container" [hasBackdrop]="false">
 
-  <mat-sidenav #sidenav mode="over" closed class="mat-sidebox" [ngClass]="screenWidth < 760 ? 'mobile-sidenave' : '' " >
+  <mat-sidenav #sidenav mode="over" closed class="mat-sidebox" [ngClass]="screenWidth < 760 ? 'mobile-sidenave' : '' ">
 
-    <div *ngIf="GlobalGeometry.length > 0" class="matbox">
+    <div *ngIf="ActiveDistrictData" class="matbox">
 
       <!-- Heading -->
       <header class="download-city">
-        <h2 class="city">{{GlobalGeometry[0].properties.dist_name}} 
-           ({{GlobalGeometry.length}})
+        <h2 class="city">{{ActiveDistrictData.city}}
+          ({{ActiveDistrictData.geometry.length}})
         </h2>
         <div style="padding-top: 6px;">
-          <mat-icon matTooltip="Download {{GlobalGeometry[0].properties.pc_name}} Data"
-            matTooltipClass="my-custom-tooltip"
-            (click)="OnDownloadDistrictData(GlobalGeometry[0].properties.pc_name,GlobalGeometry)">download</mat-icon>
+          <mat-icon matTooltip="Download {{ActiveDistrictData.city}} Data" matTooltipClass="my-custom-tooltip"
+            (click)="OnDownloadDistrictData(ActiveDistrictData.city,ActiveDistrictData.geometry)">download</mat-icon>
 
-          <mat-icon matTooltip="Zoom to District" matTooltipClass="my-custom-tooltip" (click)="ZoomToDistrict()">
+          <mat-icon matTooltip="Zoom to District" matTooltipClass="my-custom-tooltip"
+            (click)="ZoomToDistrict(ActiveDistrictData.geometry)">
             <span class="material-symbols-outlined">
               zoom_in
             </span>
@@ -34,7 +34,8 @@
 
 
         <table class="citytable" *ngIf="!EditTehsilMode">
-          <tr *ngFor="let tehsil of GlobalGeometry; let index=index" class="tehsil" id="{{tehsil.properties.ac_name}}">
+          <tr *ngFor="let tehsil of ActiveDistrictData.geometry; let index=index" class="tehsil"
+            id="{{tehsil.properties.ac_name}}">
 
             <td>
               <span class="custom-input custom-input-color">
@@ -65,14 +66,14 @@
           <!-- <button class="authButton" (click)="EditTehsilMode =false">
             Back
           </button> -->
-          <h5 class="edit-th-mode-h" >
-              <mat-icon class="pointer pr-15" (click)="EditTehsilMode =false" ><span class="material-symbols-outlined">
+          <h5 class="edit-th-mode-h">
+            <mat-icon class="pointer pr-15" (click)="EditTehsilMode =false"><span class="material-symbols-outlined">
                 arrow_back
-                </span>
-              </mat-icon>
-              <span>
-                {{EditedTehsilValue.ac_name}}
               </span>
+            </mat-icon>
+            <span>
+              {{EditedTehsilValue.ac_name}}
+            </span>
             <!-- <mat-icon (click)="ReadMode != ReadMode">edit</mat-icon> -->
             <!-- <mat-icon>add</mat-icon> -->
           </h5>
@@ -101,16 +102,15 @@
       <div *ngIf="DistrictMode === 'edit_district_list' " class="main-body">
 
         <div class="save-data-btn">
-          <mat-icon  matTooltip="Save Data"
-          matTooltipClass="my-custom-tooltip" class="pointer pl-15" (click)="SaveDistrictLevelData()">
-          save</mat-icon>
+          <mat-icon matTooltip="Save Data" matTooltipClass="my-custom-tooltip" class="pointer pl-15"
+            (click)="SaveDistrictLevelData()">
+            save</mat-icon>
 
-          <mat-icon class="pointer" (click)="DistrictMode = 'view_disctrict_data' "
-          matTooltip="Close"
-          matTooltipClass="my-custom-tooltip">
+          <mat-icon class="pointer" (click)="DistrictMode = 'view_disctrict_data' " matTooltip="Close"
+            matTooltipClass="my-custom-tooltip">
             <span class="material-symbols-outlined">
               cancel
-              </span>
+            </span>
           </mat-icon>
           <!-- <button class="authButton" (click)="DistrictMode = 'view_disctrict_data' ">
             Cancel
@@ -153,10 +153,10 @@
 
   <mat-sidenav-content>
 
-    <div class="up-box" *ngIf="screenWidth < 759" >
-      <mat-icon class="arrow-up" (click)="OnScrollTop()" >
+    <div class="up-box" *ngIf="screenWidth < 759">
+      <mat-icon class="arrow-up" (click)="OnScrollTop()">
         <span class="material-symbols-outlined">
-        arrow_upward
+          arrow_upward
         </span></mat-icon>
     </div>
 
@@ -201,34 +201,98 @@
 
 </mat-sidenav-container>
 
+
+
 <!-- web view sidebar -->
 <section class="dropdown-block" *ngIf="screenWidth > 760">
   <mat-card class="mat-card">
     <mat-icon>
       <span class="material-symbols-outlined">
-        search
+        <!-- search -->
+        public
       </span>
     </mat-icon>
-    Search City Data
+    GeoLocator
   </mat-card>
 
 
   <div id="load-data-wrapper">
+
     <div class="load-div">
-      <!-- <h4>Select Country :</h4> -->
-      <div>
-        <mat-form-field>
+
+      <div class="flag-box d-flex ai-c">
+        <img class="flag-h" src="assets/img/india.png" alt="">
+        <mat-icon class="pointer pl-15" [matMenuTriggerFor]="menu"><span class="material-symbols-outlined">
+            settings</span></mat-icon>
+        <mat-menu #menu="matMenu">
+          <div mat-menu-item>
+            <img class="flag-h" src="assets/img/india.png" alt="">
+          </div>
+          <mat-divider></mat-divider>
+
+          <div mat-menu-item>
+            <img class="flag-h" src="assets/img/united-kingdom.png" alt="">
+          </div>
+          <mat-divider></mat-divider>
+          <div mat-menu-item>
+            <img class="flag-h" src="assets/img/united-states-of-america.png" alt="">
+          </div>
+        </mat-menu>
+
+        <!-- <mat-form-field>
 
           <mat-select class="cabin zindex" [(ngModel)]="selectedCountry" [value]="'India'"
             (ngModelChange)=OnSelectedCountry($event) placeholder="Select Country">
             <mat-option value="India">India</mat-option>
-            <!-- <mat-option value="USA">USA</mat-option>
-            <mat-option value="UK">United Kingdom (UK) </mat-option> -->
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
+
       </div>
 
-      <mat-form-field>
+      <mat-divider></mat-divider>
+
+      <div class="mt-5">
+
+
+        <!-- <mat-form-field>
+          <mat-select class="cabin zindex" [(ngModel)]="selectedCountry" [value]="'India'"
+            (ngModelChange)=OnSelectedCountry($event) placeholder="Data Type">
+            <mat-option value="India">City</mat-option>
+            <mat-option value="India">PinCode</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+        <div >
+          <span class="flex-start d-flex ai-c" [matMenuTriggerFor]="menu1">
+            <mat-icon class="pointer">
+              <span class="material-symbols-outlined">
+                folder
+              </span>
+            </mat-icon>
+            <span class="pointer city-data">
+              City Data
+            </span>
+          </span>
+
+          <mat-menu #menu1="matMenu">
+            <div mat-menu-item>City Data
+            </div>
+            <mat-divider></mat-divider>
+            <div mat-menu-item>
+              PinCode Data
+            </div>
+            <mat-divider></mat-divider>
+          </mat-menu>
+        </div>
+
+        <div class="mt-5 multisearch">
+          <app-multiselect-dropdown (EmitSearchData)="EmitSearchData($event)"></app-multiselect-dropdown>
+        </div>
+
+      </div>
+
+
+      <!-- <mat-form-field>
         <mat-select class="cabin" [disableOptionCentering]="true" #select1 placeholder="Select State"
           (selectionChange)="StateSelection($event)">
           <mat-select-filter *ngIf="select1.focused" [displayMember]="'state'" [array]="StateAndDistrictData"
@@ -237,11 +301,11 @@
             {{ item.state }}
           </mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
 
       <!-- <h4 class="mt-5" >Select District :</h4> -->
       <br>
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-select class="cabin" [disableOptionCentering]="true" #select2 placeholder="Select District"
           (selectionChange)="DistrictSelection($event)" [disabled]="IsHideDistrictTable">
           <mat-select-filter *ngIf="select2.focused" [array]="SelectedDistrictData"
@@ -250,28 +314,27 @@
             {{ value }}
           </mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
+
+
+      <mat-divider></mat-divider>
+
 
       <br>
 
-      <!-- <button class="authButton">
-            Submit
-          </button> -->
-
-
+      <div class="dflex flex-end">
+        <img class="link-img" src="assets/img/linkedin.png" alt="linkedin" (click)="ViewLinkedInPro = true">
+        <a href="https://www.linkedin.com/in/balram-rajput-a15782191/" target="_blank">@Balram-Rajput</a>
+      </div>
     </div>
 
-              
-    <div class="dflex flex-end" >
-      <img class="link-img" src="assets/img/linkedin.png" alt="linkedin"
-      (click)="ViewLinkedInPro = true">
-      <a href="https://www.linkedin.com/in/balram-rajput-a15782191/" target="_blank">@Balram-Rajput</a>
-    </div>
+
+
+
 
   </div>
 
 
-  <app-multiselect-dropdown></app-multiselect-dropdown>
 
 </section>
 
@@ -283,25 +346,25 @@
       <span class="material-symbols-outlined">
         search
     </mat-icon> -->
-    
-      <span>
-        Search City Data
-      </span>
-      <mat-icon *ngIf="!toogleMobileDrop"  (click)="toogleMobileDrop =true;" >
-        <span class="material-symbols-outlined">
-            expand_more
-          </span>
-      </mat-icon>
 
-      <mat-icon *ngIf="toogleMobileDrop"  (click)="toogleMobileDrop = false;" >
-        <span class="material-symbols-outlined">
-            expand_less
-          </span>
-      </mat-icon>
+    <span>
+      Search City Data
+    </span>
+    <mat-icon *ngIf="!toogleMobileDrop" (click)="toogleMobileDrop =true;">
+      <span class="material-symbols-outlined">
+        expand_more
+      </span>
+    </mat-icon>
+
+    <mat-icon *ngIf="toogleMobileDrop" (click)="toogleMobileDrop = false;">
+      <span class="material-symbols-outlined">
+        expand_less
+      </span>
+    </mat-icon>
   </mat-card>
 
 
-  <div id="load-data-wrapper-mbv" *ngIf="toogleMobileDrop" >
+  <div id="load-data-wrapper-mbv" *ngIf="toogleMobileDrop">
     <div class="load-div-mbv">
       <!-- <h4>Select Country :</h4> -->
       <div>
@@ -319,12 +382,12 @@
 
       <mat-form-field>
         <mat-select class="cabin" [disableOptionCentering]="true" #select1 placeholder="Select State"
-          (selectionChange)="StateSelection($event)" [value]="StateValue" >
+          (selectionChange)="StateSelection($event)" [value]="StateValue">
           <mat-select-filter *ngIf="select1.focused" [displayMember]="'state'" [array]="StateAndDistrictData"
             (filteredReturn)="filteredList1 = $event"></mat-select-filter>
           <mat-option *ngFor="let item of filteredList1; let i = index;" [value]="item">
             {{ item.state }}
-          </mat-option> 
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -333,7 +396,7 @@
       <mat-form-field>
         <!-- [disabled]="IsHideDistrictTable" -->
         <mat-select class="cabin" [disableOptionCentering]="true" #select2 placeholder="Select District"
-          (selectionChange)="DistrictSelection($event)" [value]="DistrictValue" >
+          (selectionChange)="DistrictSelection($event.value)" [value]="DistrictValue">
           <mat-select-filter *ngIf="select2.focused" [array]="SelectedDistrictData"
             (filteredReturn)="filteredList2 = $event"></mat-select-filter>
           <mat-option *ngFor="let value of filteredList2" [value]="value">
@@ -346,9 +409,8 @@
 
     </div>
 
-    <div class="dflex al-center" >
-      <img class="link-img-mb" src="assets/img/linkedin.png" alt="linkedin"
-      (click)="ViewLinkedInPro = true">
+    <div class="dflex al-center">
+      <img class="link-img-mb" src="assets/img/linkedin.png" alt="linkedin" (click)="ViewLinkedInPro = true">
       <a class="ft-sm" href="https://www.linkedin.com/in/balram-rajput-a15782191/" target="_blank">@Balram-Rajput</a>
     </div>
 

@@ -1,13 +1,12 @@
-<h3>Author DaiDH</h3>
 
 <div *ngIf="loadContent" class="container">
-	<form [formGroup]="formGroup" (ngSubmit)="save()" (reset)="resetForm()">
+  <!-- (ngSubmit)="save()" (reset)="resetForm()" -->
+	<form  [formGroup]="formGroup" >
 		
     <ng-multiselect-dropdown #multiSelect
-    [settings]="settings"
-
-      [placeholder]="'Select City'" 
-      [data]="data" 
+      [settings]="settings"
+      [placeholder]="'Search Your City'" 
+      [data]="SearchData" 
       [formControl]="f?.name" 
       [disabled]="false"
       [class.is-invalid]="f?.name?.errors?.required && f?.name?.touched"
@@ -19,13 +18,20 @@
       (onDeSelectAll)="onDeSelectAll($event)">
 	</ng-multiselect-dropdown>
     <!-- [class.is-invalid]="f?.name?.errors?.required && f?.name?.touched" -->
-    <span *ngIf="f?.name?.errors?.required && f?.name?.touched" style="color: red;">
+    <!-- <span *ngIf="f?.name?.errors?.required && f?.name?.touched" style="color: red;">
       City is required
-    </span>
+    </span> -->
 
-    <br/> <br/>
+    <br/> 
+    <!-- <input type="submit" value="Submit"> |  -->
+    <!-- <input type="reset" value="Reset"> |  -->
+    <!-- <input type="button" value="Toggle Select All" (click)="multiSelect.toggleSelectAll()"> -->
+    <div style="display: flex; justify-content: space-around;">
 
-    <input type="submit" value="Submit"> | <input type="reset" value="Reset"> | <input type="button" value="Toggle Select All" (click)="multiSelect.toggleSelectAll()">
+      <button  mat-raised-button color="primary" (click)="OnSubmitSearch()" >Search </button>
+      <button type="reset" mat-raised-button color="primary" (click)="resetForm()" >Reset</button>
+    </div>
+
 
   </form>
 </div>

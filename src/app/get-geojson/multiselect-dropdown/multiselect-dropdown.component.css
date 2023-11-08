@@ -1,11 +1,15 @@
 h3 {
     text-align: center;
-    font-family: 'Courier New', Courier, monospace;
+    /* font-family: 'Courier New', Courier, monospace; */
+    font-family: 'Montserrat';
+
   }
   
   .container {
     width: 90%;
-    margin: 0 auto;
+    margin: 0;
+    font-size: 12px !important;
+
   }
   
   ::ng-deep {
@@ -25,3 +29,19 @@ h3 {
     }
   }
   
+
+  ::ng-deep .multiselect-dropdown .dropdown-btn .selected-item:hover{
+    box-shadow: 2px 4px #9595958f !important;
+  }
+
+  :host ::ng-deep .mat-raised-button {
+    
+    font-family:'Cabin'!important; 
+    font-size:12px;
+    line-height: 24px !important;
+    background-color: #000;
+  }
+
+  ::ng-deep .dropdown-list .filter-textbox input{
+    padding: 0 !important;
+  }

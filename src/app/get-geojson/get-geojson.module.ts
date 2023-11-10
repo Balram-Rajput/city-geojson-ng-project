@@ -25,13 +25,15 @@ import { MultiselectDropdownComponent } from './multiselect-dropdown/multiselect
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
+import { SidenaveSliderComponent } from './sidenave-slider/sidenave-slider.component';
 
 @NgModule({
   declarations: [
     DrawMapComponent,
     DummyComponent,
     DownloadGeojsonDataComponent,
-    MultiselectDropdownComponent
+    MultiselectDropdownComponent,
+    SidenaveSliderComponent
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),

@@ -58,3 +58,7 @@ h4{
     top: -8px;
     right: -16px;
 }
+
+p fa-icon{
+    cursor: pointer;
+}

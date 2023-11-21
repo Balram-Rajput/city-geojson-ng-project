@@ -1,4 +1,21 @@
 <button (click)="click()" >Click Me</button>
-<div id="map" ></div>
+
+<div>
+    <span class="flex-start d-flex ai-c" #trigger="matMenuTrigger" [matMenuTriggerFor]="menu1">
+      <mat-icon class="pointer">folder</mat-icon>
+      <span class="pointer city-data">City Data</span>
+      <mat-icon *ngIf="!is_city_arrow_up">arrow_drop_up</mat-icon>
+      <mat-icon *ngIf="is_city_arrow_up">arrow_drop_down</mat-icon>
+    </span>
+  
+    <mat-menu #menu1="matMenu" (opened)="is_city_arrow_up =true" (closed)="is_city_arrow_up = false">
+      <button mat-menu-item >City Data</button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item >PinCode Data</button>
+      <mat-divider></mat-divider>
+    </mat-menu>
+  </div>
+    
+
 
 <!-- <app-multiselect-dropdown></app-multiselect-dropdown> -->

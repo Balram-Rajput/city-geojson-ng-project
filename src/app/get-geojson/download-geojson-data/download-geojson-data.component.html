@@ -10,8 +10,14 @@
       <button mat-raised-button color="primary" (click)="exportKML()" >Export KML</button>
       <button mat-raised-button color="primary" (click)="onNoClick()">Close</button>
     </div> -->
+    
+    <button class="close-btn"  mat-icon-button (click)="dismiss()">
+      <mat-icon>close</mat-icon>
+    </button>
 
     <h4>{{fileName}}</h4>
+
+
       <div>
         <select   class="inputType" [(ngModel)]="DownloadExtension" [value]="'KML'" (ngModelChange)=OnChangeDownloadEx($event) >
           <option value="KML">KML</option>
@@ -20,9 +26,9 @@
       </div>
 
       <div>
-        <button (click)="ClickDownload()" class="authButton" >
+        <!-- <button (click)="ClickDownload()" class="authButton" >
           Download {{DownloadExtension}}
-        </button>
+        </button> -->
       </div>
 
 </div>

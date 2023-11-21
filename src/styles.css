@@ -27,3 +27,34 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .ai-c{
     align-items: center;
   }
+
+  .pointer{
+    cursor: pointer;
+}
+
+.pl-15{
+  padding-left:15px ;
+}
+.pr-15{
+  padding-right:15px ;
+}
+.pl-5{
+  padding-left: 5px;
+}
+
+.cabin{
+  font-family: 'Cabin' !important;
+}
+
+.sucess-snack{
+  background: #19a606 !important;
+}
+
+.fail-snack{
+  background: #e91b1b !important;
+}
+
+/* .btnLoader-white :host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle{
+  stroke: #fff !important ;
+} */
+

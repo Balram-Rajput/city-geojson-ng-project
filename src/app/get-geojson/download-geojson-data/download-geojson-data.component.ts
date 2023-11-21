@@ -140,5 +140,9 @@ export class DownloadGeojsonDataComponent implements OnInit {
         }
     }
 
+    dismiss(){
+        this.dialogRef.close()
+    }
+
 
 }

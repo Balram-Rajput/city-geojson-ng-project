@@ -3,15 +3,20 @@ import { MatDialog } from '@angular/material/dialog';
 import * as turf from "@turf/turf";
 import * as maplibregl from "maplibre-gl"
 import { DownloadGeojsonDataComponent } from '../get-geojson/download-geojson-data/download-geojson-data.component';
+import {IndiaDistrictModel,IndiaPinCodeModel} from "./modals/india-district.modal"
 
+
+//india_city_data //india_pincode_city //india_pincode_direct
 
 @Injectable({
   providedIn: 'root'
 })
 export class MaphelperService {
 
-  constructor(private MatDialog: MatDialog) { }
+  selectedDataFormatKey:any = "";
 
+ 
+  constructor(private MatDialog: MatDialog) { }
 
   @Output() FeatureModalSideNave: EventEmitter<any> = new EventEmitter<any>();
 
@@ -133,11 +138,11 @@ export class MaphelperService {
 
     let styleValues = [
       'match',
-       ["to-string", ['get', 'ac_name']] 
+       ["to-string", ['get', this.selectedDataFormatKey]] 
     ]
 
     GlobalGeometry.forEach(val=>{
-      styleValues.push(val.properties.ac_name)
+      styleValues.push(val.properties[this.selectedDataFormatKey])
       styleValues.push(val.properties.color)
     })
     styleValues.push("#000000")
@@ -157,8 +162,8 @@ export class MaphelperService {
       border-radius: 8px;
       cursor: pointer;`
 
-    let cabin = 'font-family:Cabin !important'
-    const innerHtmlContent = `<h2 style='${cabin}' > ${e.features[0].properties.ac_name}</h2>`;
+    let cabin = 'font-family:Cabin !important';
+    const innerHtmlContent = `<h2 style='${cabin}'   > ${e.features[0].properties[this.selectedDataFormatKey]}</h2>`;
     const divElement = document.createElement('div');
     const assignBtn = document.createElement('div');
     assignBtn.innerHTML = `<div> <button style='${PopupStyle}' >Download</button> </div>`;
@@ -169,7 +174,7 @@ export class MaphelperService {
     assignBtn.addEventListener('click', (e) => {
       this.MatDialog.open(DownloadGeojsonDataComponent, {
         width: '300px',
-        data: { 'fileName': FeatureData.properties.ac_name, 'coordinates': FeatureData.geometry.coordinates, 'properties': FeatureData.properties,'download_type':'tehsil_data' }
+        data: { 'fileName': FeatureData.properties[this.selectedDataFormatKey], 'coordinates': FeatureData.geometry.coordinates, 'properties': FeatureData.properties,'download_type':'tehsil_data' }
       })
     });
 
@@ -196,7 +201,7 @@ export class MaphelperService {
         'fill-color': '#f7a9f2',
         'fill-opacity': 0.5
       },
-      'filter': ['in', 'ac_name', '']
+      'filter': ['in', this.selectedDataFormatKey, '']
     });
 
     const bbox = [
@@ -205,9 +210,9 @@ export class MaphelperService {
     ];
     const selectedFeatures = map.queryRenderedFeatures(bbox, {})
     const fips = selectedFeatures.map(
-      (feature) => feature.properties.ac_name
+      (feature) => feature.properties[this.selectedDataFormatKey]
     );
-    map.setFilter('gid-highlighted', ['in', 'ac_name', fips[0]]);
+    map.setFilter('gid-highlighted', ['in', this.selectedDataFormatKey, fips[0]]);
 
   }
 
@@ -239,7 +244,6 @@ export class MaphelperService {
       this.highlightPopup.remove()
     }
   }
-
 
 
 

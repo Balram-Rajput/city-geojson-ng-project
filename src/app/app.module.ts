@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModuleModule } from './common-module/common-module.module';
 import { HttpClientModule } from '@angular/common/http';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
   declarations: [
@@ -19,8 +19,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HttpClientModule,
     BrowserAnimationsModule,
     CommonModuleModule,
+    // FontAwesomeModule,
 
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

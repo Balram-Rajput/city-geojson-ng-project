@@ -1,1 +1,155 @@
-<p>sidenave-slider works!</p>
+
+    <div *ngIf="ActiveDistrictData" class="matbox">
+
+    <!-- Heading -->
+    <header class="download-city">
+        <h2 class="city">{{ActiveDistrictData.key}}
+        ({{ActiveDistrictData.geometry.length}})
+        </h2>
+        <div style="padding-top: 6px;">
+        <mat-icon matTooltip="Download {{ActiveDistrictData.key}} Data" matTooltipClass="my-custom-tooltip"
+            (click)="OnDownloadDistrictData(ActiveDistrictData.key,ActiveDistrictData.geometry)">download</mat-icon>
+
+        <mat-icon matTooltip="Zoom to District" matTooltipClass="my-custom-tooltip"
+            (click)="ZoomToDistrict(ActiveDistrictData.geometry)">
+            <span class="material-symbols-outlined">
+            zoom_in
+            </span>
+        </mat-icon>
+        <mat-icon matTooltip="Edit District Data" 
+        (click)="EditDistrictData('edit_district_list')"
+            matTooltipClass="my-custom-tooltip">
+            <span class="material-symbols-outlined">
+            edit_square
+            </span>
+        </mat-icon>
+
+        <mat-icon (click)="CloseCityNav()">close</mat-icon>
+        </div>
+    </header>
+
+    <div *ngIf="DistrictMode == 'view_disctrict_data' " class="main-body">
+
+
+        <table class="citytable" *ngIf="!ViewTehsilPros">
+        <tr *ngFor="let tehsil of ActiveDistrictData.geometry; let index=index" class="tehsil"
+            id="{{tehsil.properties[selectedDataFormatKey]}}">
+
+            <td>
+            <span class="custom-input custom-input-color">
+                <div [style.background]="tehsil.properties.color" class="color-div"></div>
+            </span>
+            </td>
+
+            <td class="fw-6" [ngClass]="HighlightFeatureData?.[selectedDataFormatKey] === tehsil.properties[selectedDataFormatKey] ? 'active-tehsil' : '' ">
+
+            {{ tehsil.properties[selectedDataFormatKey] }}
+            </td>
+
+            <td>
+            <mat-icon class="pointer pl-5" (click)="ZoomToTehshil(tehsil.geometry.coordinates)"><span
+                class="material-symbols-outlined">
+                visibility</span></mat-icon>
+            </td>
+
+            <td>
+            <mat-icon class="pointer pl-5" (click)="OnClickViewTehsil(tehsil.properties,index)"><span
+                class="material-symbols-outlined">
+                description</span></mat-icon>
+            </td>
+        </tr>
+
+        </table>
+
+        <div *ngIf="ViewTehsilPros">
+        <!-- <button class="authButton" (click)="ViewTehsilPros =false">
+            Back
+        </button> -->
+        <h5 class="edit-th-mode-h">
+            <mat-icon class="pointer pr-15" (click)="ViewTehsilPros=false"><span class="material-symbols-outlined">
+                arrow_back
+            </span>
+            </mat-icon>
+            <span>
+            {{EditedTehsilValue[selectedDataFormatKey]}}
+            </span>
+            <!-- <mat-icon (click)="ReadMode != ReadMode">edit</mat-icon> -->
+            <!-- <mat-icon>add</mat-icon> -->
+        </h5>
+
+        <table class="citytable">
+            <!-- *ngIf="key != 'st_name' && key != 'st_name' " -->
+            <tr *ngFor="let key of EditedTehsilKey">
+            <td>{{key}}</td>
+            <td>
+                <input [disabled]="ReadMode" type="text" [(ngModel)]="EditedTehsilValue[key]">
+            </td>
+            <!-- <input *ngIf="ReadMode" type="text"  [(ngModel)]="EditedTehsilValue[key]" ></td> -->
+            <td *ngIf="!ReadMode">
+                <mat-icon>delete</mat-icon>
+            </td>
+            </tr>
+        </table>
+
+
+
+        </div>
+
+
+    </div>
+
+    <div *ngIf="DistrictMode === 'edit_district_list' " class="main-body">
+
+        <div class="save-data-btn">
+        <mat-icon matTooltip="Save Data" matTooltipClass="my-custom-tooltip" class="pointer pl-15"
+            (click)="SaveDistrictDataFn()">
+            save</mat-icon>
+
+        <mat-icon class="pointer" (click)="DistrictMode = 'view_disctrict_data' " matTooltip="Close"
+            matTooltipClass="my-custom-tooltip">
+            <span class="material-symbols-outlined">
+            cancel
+            </span>
+        </mat-icon>
+        <!-- <button class="authButton" (click)="DistrictMode = 'view_disctrict_data' ">
+            Cancel
+        </button> -->
+        <!-- <mat-icon (click)="DistrictMode = 'view_disctrict_data' " >back</mat-icon> -->
+        <!-- <button class="authButton" (click)="SaveDistrictLevelData()">
+                Save
+            </button>
+            <button class="authButton" (click)="DistrictMode = 'view_disctrict_data' ">
+                Cancel
+            </button> -->
+        </div>
+
+        <div *ngFor="let city of ActiveDistrictData.geometry; let i = index;">
+
+        <div class="edit-dist">
+            <input type="text" [(ngModel)]="ActiveDistrictData?.geometry[i]['properties'][selectedDataFormatKey]" class="cabin">
+
+            <div class="fillpaint" [style.background]="ActiveDistrictData.geometry[i].properties.color" [cpCancelButton]="true"
+            [cpCancelButtonClass]="'btn btn-primary btn-xs'" [(colorPicker)]="ActiveDistrictData.geometry[i].properties.color"
+            [cpOKButton]="true">
+
+            <mat-icon class="pointer"
+                [style.color]="ActiveDistrictData.geometry[i].properties.color">format_color_fill</mat-icon>
+            </div>
+
+        </div>
+        </div>
+
+
+
+    </div>
+
+
+    </div>
+
+
+  
+  
+  
+  
+  
+  

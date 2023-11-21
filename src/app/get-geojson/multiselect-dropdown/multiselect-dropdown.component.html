@@ -28,7 +28,19 @@
     <!-- <input type="button" value="Toggle Select All" (click)="multiSelect.toggleSelectAll()"> -->
     <div style="display: flex; justify-content: space-around;">
 
-      <button  mat-raised-button color="primary" (click)="OnSubmitSearch()" >Search </button>
+      <button  mat-raised-button color="primary" (click)="OnSubmitSearch()" >
+        <span *ngIf="!multiSearchLoader" >
+          Search
+        </span>   
+        <span *ngIf="multiSearchLoader">
+          <!-- <mat-icon class="btnLoader-white" > -->
+          <mat-progress-spinner
+              [mode]="'indeterminate'"
+              diameter="20">
+          </mat-progress-spinner>
+          <!-- </mat-icon> -->
+        </span>
+      </button>
       <button type="reset" mat-raised-button color="primary" (click)="resetForm()" >Reset</button>
     </div>
 

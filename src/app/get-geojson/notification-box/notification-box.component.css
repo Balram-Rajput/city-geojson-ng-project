@@ -1,0 +1,25 @@
+.custom-snackbar {
+    font-family: Montserrat;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    /* background-color: #2196F3;  */
+    color: white; /* Change to your desired text color */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  button {
+    color: white;
+  }
+
+  button mat-icon{
+    font-size: 13px;
+    /* border: 1px solid white; */
+    /* border-radius: 33px; */
+  }
+
+  ::ng-deep .mat-snack-bar-container{
+    padding: 0 !important
+  }

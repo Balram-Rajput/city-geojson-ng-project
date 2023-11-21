@@ -13,6 +13,7 @@ export class DummyComponent implements OnInit, AfterViewInit{
 
   constructor(private _formBuilder: FormBuilder) {}
   map
+  is_city_arrow_up
   ngOnInit(): void {
     this.mySubject.next('balram')
     this.mySubject.subscribe(val=>{
@@ -133,6 +134,9 @@ click(){
   this.download(JSON.stringify(goejson),'file.geojson','text/plain')
 }
 // download(jsonData, 'json.txt', 'text/plain');
+
+
+  
 
 
 }

@@ -45,3 +45,9 @@ h3 {
   ::ng-deep .dropdown-list .filter-textbox input{
     padding: 0 !important;
   }
+
+  /* .btnLoader-white :host  */
+  ::ng-deep .mat-progress-spinner circle, .mat-spinner circle{
+    stroke: #fff !important ;
+    color: #fff !important ;
+  }

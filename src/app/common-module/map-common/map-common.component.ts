@@ -3,6 +3,7 @@ import * as maplibregl from "maplibre-gl"
 import * as MapboxDraw from "@mapbox/mapbox-gl-draw";
 import DrawRectangle from 'mapbox-gl-draw-rectangle-mode'
 import { MaphelperService } from '../maphelper.service';
+import { MapboxExportControl, Size, PageOrientation, Format, DPI} from "@watergis/mapbox-gl-export";
 
 @Component({
   selector: 'app-map-common',
@@ -52,8 +53,23 @@ export class MapCommonComponent implements OnInit {
       zoom: 3  // starting zoom
     })
 
+    // this.map.addControl(new MapboxExportControl(), 'top-right');
+      // create control with specified options
+
+
+
     this.map.addControl(new maplibregl.NavigationControl({}), 'bottom-right');
+    // this.map.addControl(new maplibregl.NavigationControl({}));
     this.map.addControl(this.draw);
+
+    this.map.addControl(new MapboxExportControl({
+      PageSize: Size.A3,
+      PageOrientation: PageOrientation.Portrait,
+      Format: Format.PNG,
+      DPI: DPI[96],
+      Crosshair: true,
+      PrintableArea: true
+  }), 'top-right');
 
 
 

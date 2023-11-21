@@ -1,338 +1,259 @@
-.mat-card{
-    background-color: #000;
-    /* border-radius: 14px 14px 0 0; */
-    color: white;
-    /* font-family: cursive; */
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    padding: 9px !important;
-    font-family: 'Montserrat';
-    justify-content: center;
-    font-weight: 700;
-
+.main-div{
+  width: 100%;
+  /* height: 100vh; */
+  display: flex;
+  /* flex-direction: row-reverse; */
 }
 
-.mat-card .mat-icon{
-    /* font-size: 23px; */
-    padding-right: 15px;
-}
-
-
-.map-tools{
-    position: absolute;
-    z-index: 2;
-    left: 5px;
-    top: 5px;
-}
-
-.search-icon{
-    height: 30px;
-    background-color: #fff;
-    border: 1px solid black;
-}
-
-.box{
-    border: 1px solid  #d3d3d3;
-    padding: 5px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-       
-}
-.mt-5{
-    margin-top: 15px;
-}
-
-.img{
-    width: 20px;
-}
-
-#geocoder{
-    z-index: 99;
-    position: absolute;
-    top: 0;
-    left: 0px;
-    background: white;
-    border: 1px solid gray;
-    padding: 2px;
-    margin-left: 6px;
-    margin-top: 3px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.example-form-field{
-
-    z-index: 99;
-    position: absolute;
-    top: 0;
-    left: 0px;
-    padding: 2px;
-    margin-left: 6px;
-    margin-top: 3px;
-
-}
-
-
-.geo-data{
-
-    z-index: 99;
-    position: absolute;
-    top: 37px;
-    left: 0px;
-    padding: 2px;
-    margin-left: 6px;
-    margin-top: 3px;
-    background-color: white;
-    width: 20%;
-}
-
-.example-form-field button{
-    cursor: pointer;
-}
-
-.matlist{
-    white-space: nowrap;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-
-.mat-sidebox{
-    width: 20%;
-    height: 56%;
-    bottom: 5px;
-    margin-top: auto;
-    border-radius: 0 10px 8px 0;
-    overflow: hidden;
-}
-
-
-:host ::ng-deep .mapboxgl-popup-content, .maplibregl-popup-content{
-    font-family: sans-serif;
-    font-size: 12px !important;
-    color: black;
-    font-weight: 600;
-    padding:8px 14px;
-}
-
-.tehsil{
-    font-family: 'Montserrat';
-}
-.cabin{
-    font-family: 'Cabin' !important;
-}
-
-.mat-option{
-    font-family: 'Cabin' !important;
-}
-
-.city{
-    /* background: #151414; */
-    color: white;
-    display: flex;
-    justify-content: center;
-    padding: 0px;
-    font-size: 13px;
-    margin: 0;
-
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-}
-
-.pointer{
-    cursor: pointer;
-}
-
-.pl-5{
-    padding-left: 5px;
-}
-
-/* color picker */
-.custom-input-color ::ng-deep .color-picker{
-    top: 83px !important;
-    left: 24px !important;
-  }
-  .custom-input-strock ::ng-deep .color-picker{
-    top: 83px !important;
-    left: 24px !important;
-  }
-
-  .cp-box{
-    width: 35px;
-    border-radius: 8px;
-  }
-
-  /* end color picker */
-
-
-  /* CitySidenave  */
-
-  .cityClosebtn{
-    position: absolute;
-    right: 0;
-    font-size: 20px;
-    cursor: pointer;
-    justify-content: center;
-    margin-top:5px
-  }
-  .edit-cp-box{
-    width: 35px;
-    border-radius: 8px;
-  }
-  .download-city{
-    background: black;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0px 3px 9px !important;
-    align-items: center;
-    position: sticky;
-    margin: 0;
-    top: 0;
-    position: relative;
-    height: 8%;
-    /* margin-top: 10px; */
-    /* width: 97%; */
-  }
-
-  .p-lr{
-    padding: 0 10px;
-  }
-
-  
-  .matbox{
-    background: #d3d3d347;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  .download-city mat-icon{
-    cursor: pointer;
-    font-size: 18px;
-    color: white;
-  }
-  .citytable{
-    margin-top: 9px;
-    margin-left: 10px;
-  }
-
-  .main-body{
-    height: 92%;
-    overflow: scroll;
-  }
-
-  ::ng-deep .my-custom-tooltip {
-    max-width: unset !important;
-  }
-
-  .tool-menu-arrow{
-    position: absolute;
-    bottom: 45%;
-    cursor: pointer;
-    z-index: 9999;
-    background: black;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    margin-left: 1px;
-  }
-  .tool-menu-arrow mat-icon{
-    color: white ;
-    font-weight: 600;
-  }
-
-  .edit-dist mat-icon{
-    font-size: 18px;
-    vertical-align: middle;
-  }
-
-  .edit-dist input{
-    padding: 4px 20px 6px 4px;
-  }
-
-  .color-div{
-    padding: 6px;
-    border-radius: 2px 2px;
-    margin: 0px 2px 0px 3px
-  }
-
-  .save-data-btn{
-    display: flex;
-    justify-content: space-between;
-    /* padding-bottom: 23px; */
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    /* background: gray; */
-  }
-
-  .m-0{
-    margin: 0 auto !important;
-  }
-
-  /* End CitySidenave  */
-
-
-
-  /* position: absolute;
-  top: 39px;
-  display: grid;
+.mat-card {
+  background-color: #000;
+  /* border-radius: 14px 14px 0 0; */
+  color: white;
+  /* font-family: cursive; */
+  font-size: 14px;
+  display: flex;
   align-items: center;
-  right: 0;
-  background: #f4caca;
+  padding: 9px !important;
+  font-family: 'Montserrat';
+  justify-content: center;
+  font-weight: 700;
+
+}
+
+.mat-card .mat-icon {
+  /* font-size: 23px; */
+  padding-right: 15px;
+}
+
+
+.map-tools {
+  position: absolute;
+  z-index: 2;
+  left: 5px;
+  top: 5px;
+}
+
+.search-icon {
+  height: 30px;
+  background-color: #fff;
+  border: 1px solid black;
+}
+
+.box {
+  border: 1px solid #d3d3d3;
+  padding: 5px 14px;
+  border-radius: 8px;
   cursor: pointer;
-  padding: 17px 6px;
-  background: black; */
 
-
-.edit-save{  
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 28px;
 }
 
-.ml-5{
-    margin-left: 25px;
+.mt-5 {
+  margin-top: 15px;
 }
 
-#load-data-wrapper{
-    display: block;
-    background-color: #f5f4f4;
-    padding: 10px 15px;
-    height: calc(100% - 40px);
-    border-radius: 0 0 14px 14px;
-    /* width: 100%; */
+.img {
+  width: 20px;
 }
 
-.load-div{
-    /* margin-top: 20px;
-    margin-bottom: 30px; */
-    padding-bottom: 30px;
-    border-bottom: 1px solid #dedede;
+#geocoder {
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  background: white;
+  border: 1px solid gray;
+  padding: 2px;
+  margin-left: 6px;
+  margin-top: 3px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.load-div h4{
-    font-family:'Cabin'!important; 
-    margin: 0;
+.example-form-field {
+
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  padding: 2px;
+  margin-left: 6px;
+  margin-top: 3px;
+  height: 25px;
+  display: flex;
+  border-radius: 16px;
+
 }
 
-.inputType{
-    /* display: block; */
-    /* width: calc(100% - 110px); */
-    /* padding: 0 10px; */
-    /* color: inherit; */
-    /* font-size: inherit; */
-    /* background: #e4e6e9; */
-    /* border: 1px solid #e4e6e9; */
-    /* text-align: inherit; */
-    /* border-color: #babcc4; */
-    /* height: 40px; */
-    /* font-weight: 400; */
-    font-family:'Cabin'!important; 
+.example-form-field mat-icon{
+  font-size: 13px;
+  margin-top: 3px;
 }
 
-.authButton{
+.geo-data {
+
+  z-index: 99;
+  position: absolute;
+  top: 37px;
+  left: 0px;
+  padding: 2px;
+  margin-left: 6px;
+  margin-top: 3px;
+  background-color: white;
+  width: 20%;
+}
+
+.example-form-field button {
+  cursor: pointer;
+}
+
+.matlist {
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+
+.mat-sidebox {
+  width: 25%;
+  height: 56%;
+  bottom: 5px;
+  margin-top: auto;
+  border-radius: 0 10px 8px 0;
+  overflow: hidden;
+}
+
+
+:host ::ng-deep .mapboxgl-popup-content,
+.maplibregl-popup-content {
+  font-family: sans-serif;
+  font-size: 12px !important;
+  color: black;
+  font-weight: 600;
+  padding: 8px 14px;
+}
+
+
+.cabin {
+  font-family: 'Cabin' !important;
+}
+
+.mat-option {
+  font-family: 'Cabin' !important;
+}
+
+
+
+.pointer {
+  cursor: pointer;
+}
+
+
+
+/* CitySidenave  */
+
+.cityClosebtn {
+  position: absolute;
+  right: 0;
+  font-size: 20px;
+  cursor: pointer;
+  justify-content: center;
+  margin-top: 5px
+}
+
+.edit-cp-box {
+  width: 35px;
+  border-radius: 8px;
+}
+
+
+.p-lr {
+  padding: 0 10px;
+}
+
+.tool-menu-arrow {
+  position: absolute;
+  bottom: 45%;
+  cursor: pointer;
+  z-index: 9999;
+  background: black;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  margin-left: 1px;
+}
+
+.tool-menu-arrow mat-icon {
+  color: white;
+  font-weight: 600;
+}
+
+
+.m-0 {
+  margin: 0 auto !important;
+}
+
+/* End CitySidenave  */
+
+
+
+/* position: absolute;
+top: 39px;
+display: grid;
+align-items: center;
+right: 0;
+background: #f4caca;
+cursor: pointer;
+padding: 17px 6px;
+background: black; */
+
+
+.edit-save {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 28px;
+}
+
+.ml-5 {
+  margin-left: 25px;
+}
+
+#load-data-wrapper {
+  display: block;
+  background-color: #f5f4f4;
+  padding: 10px 15px;
+  height: calc(100% - 40px);
+  border-radius: 0 0 14px 14px;
+  /* width: 100%; */
+}
+
+.load-div {
+  /* margin-top: 20px;
+  margin-bottom: 30px; */
+  padding-bottom: 30px;
+  border-bottom: 1px solid #dedede;
+}
+
+.load-div h4 {
+  font-family: 'Cabin' !important;
+  margin: 0;
+}
+
+.inputType {
+  /* display: block; */
+  /* width: calc(100% - 110px); */
+  /* padding: 0 10px; */
+  /* color: inherit; */
+  /* font-size: inherit; */
+  /* background: #e4e6e9; */
+  /* border: 1px solid #e4e6e9; */
+  /* text-align: inherit; */
+  /* border-color: #babcc4; */
+  /* height: 40px; */
+  /* font-weight: 400; */
+  font-family: 'Cabin' !important;
+}
+
+.authButton {
   background-color: #05b260;
   border: #00000000;
   font-size: 13px;
@@ -351,71 +272,35 @@
   font-family: 'Cabin';
 }
 
-:host ::ng-deep .cdk-overlay-pane{
-    margin-left: 17px;
-    font-family: 'Cabin'!important;
+:host ::ng-deep .cdk-overlay-pane {
+  margin-left: 17px;
+  font-family: 'Cabin' !important;
 
 }
-:host ::ng-deep .mat-menu-panel{
+
+:host ::ng-deep .mat-menu-panel {
   min-width: 86px !important;
 }
 
 
-td{
-    vertical-align: middle !important;
-    /* text-align: center; */
-    font-size: 11px;
-    /* color: #7c7777; */
-    /* padding-top: 12px; */
-  }
-
-  td .mat-icon{
-    vertical-align: middle !important;
-    font-size: 16px;
-    padding-top: 8px;
-  }
-
-
-/* Scroller */
-
-.edit-dist{
-  display: flex;
-  margin:10px;
-  align-items: center;
-}
-.fillpaint{
-  width: 0px;
-  margin-left: 40px;
-
-}
-
-
-
-/* End Scroller */
-
-:host ::ng-deep  .color-picker{
-  top: 44px !important;
-  left: 35% !important;
-  width: 60% !important;
-}
-
-.dropdown-block{
-  position: absolute;
+.dropdown-block {
+  /* position: absolute; */
   /* width: 50%; */
   top: 0;
   z-index: 100;
   right: 0;
   /* margin: 11px 11px; */
-  width: 20%;
+  width: 24%;
   height: 100%;
 }
-.zindex{
+
+.zindex {
   z-index: 999 !important;
 }
 
 
 /* Mobile view class (mbv) */
-.dropdown-block-mbv{
+.dropdown-block-mbv {
   position: absolute;
   top: 0;
   z-index: 100;
@@ -424,7 +309,7 @@ td{
   /* width: 20%; */
 }
 
-.mat-card-mbv{
+.mat-card-mbv {
   background-color: #3169b1;
   border-radius: unset !important;
   color: white;
@@ -435,7 +320,7 @@ td{
   padding: 10px 40px !important;
 }
 
-#load-data-wrapper-mbv{
+#load-data-wrapper-mbv {
   display: block;
   background-color: #f5f4f4;
   padding: 15px;
@@ -444,70 +329,51 @@ td{
   /* width: 100%; */
 }
 
-.load-div-mbv{
+.load-div-mbv {}
 
-}
-.mobile-sidenave{
-  width: 78% !important;
-}
-.web-sidenave{
+.mobile-sidenave {
   width: 78% !important;
 }
 
-.active-tehsil{
-      /* background: gray; */
-      text-decoration: underline;
-      font-weight: 800 !important;
-      /* font-size: 11px; */
-      color: red;
+.web-sidenave {
+  width: 78% !important;
 }
 
-.edit-th-mode-h{
-  display: flex;
-  align-items: center;
-  /* justify-content: space-evenly; */
-  font-size: 13px;
-  font-weight: 500;
-}
-.pl-15{
-  padding-left:15px ;
-}
-.pr-15{
-  padding-right:15px ;
-}
 
-.link-img{
+.link-img {
   width: 20px;
   height: 20px;
 }
 
-.dflex{
+.dflex {
   display: flex;
 }
-.flex-end{
+
+.flex-end {
   align-items: flex-end;
 }
 
- a{
+a {
   color: #3375b2;
   font-weight: 800;
   text-decoration: none;
 }
 
-.link-img-mb{
+.link-img-mb {
   width: 15px;
   height: 15px;
 }
 
 
-.al-center{
+.al-center {
   align-items: center;
 }
-.ft-sm{
+
+.ft-sm {
   font-size: 11px;
 }
 
-.up-box{
+.up-box {
   text-align: center;
   position: absolute;
   bottom: 0;
@@ -518,33 +384,110 @@ td{
   width: 100%;
   justify-content: center;
 }
-.arrow-up{
+
+.arrow-up {
 
   z-index: 999;
   background: white;
   border-radius: 2px;
   padding: 3px;
 }
-.flag-h{
+
+.flag-h {
   height: 24px;
 }
 
-.flag-box{
+.flag-box {
   justify-content: end;
 }
-.flex-start{
+
+.flex-start {
   justify-content: start;
 }
 
-.multisearch{
+.multisearch {
   border: 1px solid lightgray;
   padding: 20px 16px;
   border-radius: 7px;
 }
 
-.city-data{
+.city-data {
   padding-left: 15px;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   font-family: Montserrat;
   font-weight: 600;
 }
+
+.city-data .mat-icon{
+  cursor: pointer !important;
+}
+
+
+/* socail links */
+
+.social-menu{
+  position: absolute;
+  /* left: 50%; */
+  padding: 0 52px;
+  margin: 0;
+  /* transform: translate(- 50%, -50%); */
+  display: flex;
+  bottom: 0;
+  z-index: 999999999; 
+}
+
+.social-menu ul{
+  /* position: absolute;
+  left: 50%;
+  padding: 0;
+  margin: 0;
+  transform: translate(-50%, -50%); */
+  display: flex;
+  /* bottom: 0; */
+}
+
+.social-menu ul li{
+  list-style: none;
+  margin: 0 15px;
+}
+
+.social-menu ul li .fab{
+  font-size: 25px;
+  line-height: 44px;
+  transition: .3s;
+  color: #000;
+}
+
+.social-menu ul li a .fab:hover{
+  color: #fff;
+}
+
+.social-menu ul li a{
+  position: relative;
+  display: block;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #fff;
+  text-align: center;
+  transition: .6s;
+  box-shadow: 0 5px 4px rgba(0,0,0,.5);
+}
+
+.social-menu ul li a:hover{
+  transform: translate(0, -10%);
+}
+
+.social-menu ul li:nth-child(1) a:hover{
+  background-color: rgba(0, 0, 0, 0.829);
+}
+.social-menu ul li:nth-child(2) a:hover{
+  background-color: #0077b5;
+}
+.social-menu ul li:nth-child(3) a:hover{
+  background-color: #0077b5;
+}
+.social-menu ul li:nth-child(4) a:hover{
+  background-color: #000;
+}
+/* socail links */

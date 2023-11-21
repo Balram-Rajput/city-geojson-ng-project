@@ -143,7 +143,7 @@
                   City Data
                 </span>
                 <ng-template #elseBlock>
-                  <span *ngIf="selectedDataFormat === 'india_pincode_city'" >
+                  <span  *ngIf="selectedDataFormat === 'india_pincode_city'" >
                     PinCode / City Based 
                   </span>
                   <span *ngIf="selectedDataFormat === 'india_pincode_direct'"  >
@@ -176,7 +176,9 @@
 
             <mat-menu #pincodeOption="matMenu">
               <button mat-menu-item (click)="SelectDataFormat('india_pincode_city')" >City </button>
-              <button mat-menu-item (click)="SelectDataFormat('india_pincode_direct')" >Pincode</button>
+              <mat-divider></mat-divider>
+
+              <button [disabled]="true" mat-menu-item (click)="SelectDataFormat('india_pincode_direct')" >Pincode</button>
 
             </mat-menu>
 

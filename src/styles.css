@@ -58,3 +58,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   stroke: #fff !important ;
 } */
 
+.cursor-block{
+  cursor: not-allowed !important;
+}

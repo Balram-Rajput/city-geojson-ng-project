@@ -12,20 +12,17 @@ h3 {
 
   }
   
-  ::ng-deep .is-invalid {
-      .dropdown-btn {
+  ::ng-deep dropdown-btn {
         border: 1px solid red !important;
-      }
-    }
-    .multiselect-dropdown {
-      .dropdown-btn {
-        .selected-item {
-          &:hover {
+      } 
+    
+    .multiselect-dropdown  dropdown-btn 
+        selected-item :hover {
             box-shadow: 1px 1px 2px 0px #5a5a5a !important;
           }
-        }
-      }
-    }
+        
+      
+    
   
   
 

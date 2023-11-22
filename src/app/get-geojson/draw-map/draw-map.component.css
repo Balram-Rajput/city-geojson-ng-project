@@ -223,6 +223,7 @@ background: black; */
   padding: 10px 15px;
   height: calc(100% - 40px);
   border-radius: 0 0 14px 14px;
+  position: relative;
   /* width: 100%; */
 }
 
@@ -284,14 +285,13 @@ background: black; */
 
 
 .dropdown-block {
-  /* position: absolute; */
-  /* width: 50%; */
-  top: 0;
+  /* top: 0; */
   z-index: 100;
-  right: 0;
-  /* margin: 11px 11px; */
+  /* right: 0; */
   width: 24%;
-  height: 100%;
+  /* height: 100%; */
+  overflow: hidden;
+  position: relative;
 }
 
 .zindex {
@@ -426,29 +426,35 @@ a {
 /* socail links */
 
 .social-menu{
-  position: absolute;
+  /* transform: translate(- 50%, -50%); */
   /* left: 50%; */
+  /* position: absolute;
   padding: 0 52px;
   margin: 0;
-  /* transform: translate(- 50%, -50%); */
   display: flex;
   bottom: 0;
-  z-index: 999999999; 
+  z-index: 999999999;  */
 }
 
 .social-menu ul{
-  /* position: absolute;
-  left: 50%;
-  padding: 0;
-  margin: 0;
-  transform: translate(-50%, -50%); */
   display: flex;
-  /* bottom: 0; */
+  width: 100%;
+  justify-content: space-evenly;
+  position: absolute;
+  bottom: 8px;
+  border-top: 1px solid lightgray;
+  margin-left: -14px;
+  /* margin-top: 12px; */
+  background: #000000c4;
+  /* height: 100%; */
+  padding: 12px;
+  /* line-height: 11px; */
 }
 
 .social-menu ul li{
   list-style: none;
   margin: 0 15px;
+  padding: 7px;
 }
 
 .social-menu ul li .fab{
@@ -490,4 +496,7 @@ a {
 .social-menu ul li:nth-child(4) a:hover{
   background-color: #000;
 }
-/* socail links */
+.p0{
+  padding: 0 !important;
+}
+/* social links */

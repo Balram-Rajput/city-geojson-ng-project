@@ -164,7 +164,7 @@ export class MaphelperService {
 
     let cabin = 'font-family:Cabin !important';
     const innerHtmlContent = `<h2 style='${cabin}'   > ${e.features[0].properties[this.selectedDataFormatKey]}</h2>`;
-    const headingBtn = document.createElement(innerHtmlContent);
+    // const headingBtn = document.createElement(innerHtmlContent);
 
     const divElement = document.createElement('div');
     const assignBtn = document.createElement('div');

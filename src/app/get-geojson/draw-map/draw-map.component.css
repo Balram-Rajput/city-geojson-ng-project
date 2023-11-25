@@ -99,7 +99,12 @@
   margin-left: 6px;
   margin-top: 3px;
   background-color: white;
-  width: 20%;
+  width: 23%;
+  border-radius: 5px;
+}
+
+.geo-data div{
+  border-bottom: 1px solid #d3d3d3;
 }
 
 .example-form-field button {
@@ -110,6 +115,11 @@
   white-space: nowrap;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  border-bottom: 1px solid;
+  padding: 3px 7px;
 }
 
 
@@ -500,3 +510,21 @@ a {
   padding: 0 !important;
 }
 /* social links */
+
+
+.geocode-text{
+  color: #000 !important;
+  color: black;
+  display: inline-block;
+  width: 267px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  font-weight: 400 !important;
+  text-align: left;
+}
+
+::ng-deep .my-custom-tooltip {
+  max-width: unset !important;
+}

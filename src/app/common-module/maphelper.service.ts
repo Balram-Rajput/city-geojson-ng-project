@@ -4,7 +4,7 @@ import * as turf from "@turf/turf";
 import * as maplibregl from "maplibre-gl"
 import { DownloadGeojsonDataComponent } from '../get-geojson/download-geojson-data/download-geojson-data.component';
 import {IndiaDistrictModel,IndiaPinCodeModel} from "./modals/india-district.modal"
-
+import {faArrowAltCircleDown} from "@fortawesome/free-regular-svg-icons"
 
 //india_city_data //india_pincode_city //india_pincode_direct
 
@@ -155,12 +155,14 @@ export class MaphelperService {
   OpenPopup(e, map, FeatureData) {
     //Popup Contain
 
-    let PopupStyle = `background: blue;
-      padding: 8px;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;`
+    let PopupStyle = `
+    background: black;
+    padding: 5px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;`
 
     let cabin = 'font-family:Cabin !important';
     const innerHtmlContent = `<h2 style='${cabin}'   > ${e.features[0].properties[this.selectedDataFormatKey]}</h2>`;
@@ -169,7 +171,8 @@ export class MaphelperService {
     const divElement = document.createElement('div');
     const assignBtn = document.createElement('div');
 
-    assignBtn.innerHTML = `<div> <button style='${PopupStyle}' >Download</button> </div>`;
+    assignBtn.innerHTML = `<div> <button style='${PopupStyle}' >
+    Download</button> </div>`;
     divElement.innerHTML = innerHtmlContent;
     divElement.appendChild(assignBtn);
 
@@ -179,6 +182,13 @@ export class MaphelperService {
         width: '300px',
         data: { 'fileName': FeatureData.properties[this.selectedDataFormatKey], 'coordinates': FeatureData.geometry.coordinates, 'properties': FeatureData.properties,'download_type':'tehsil_data' }
       })
+    });
+
+        // Add a click event to the h2 element inside the div
+    const h2Element = divElement.querySelector('h2');
+    h2Element.addEventListener('click', function() {
+        // Add your click event logic here
+        alert('H2 element clicked!');
     });
 
 
@@ -249,7 +259,22 @@ export class MaphelperService {
   }
 
 
+  tempMarker
+  AddGeoDataMarker(map,latlng,bbox){
+      this.RemoveTempMarker()
+      // Create a default Marker, colored black, rotated 45 degrees.
+      this.tempMarker = new maplibregl.Marker({ color: 'black' })
+      .setLngLat(latlng)
+      .addTo(map);
+      map.fitBounds(bbox)
 
+  }
+
+  RemoveTempMarker(){
+    if(this.tempMarker){
+      this.tempMarker.remove()
+    }
+  }
 
 
 

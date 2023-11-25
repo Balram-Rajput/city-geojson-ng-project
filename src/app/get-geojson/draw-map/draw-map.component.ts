@@ -27,7 +27,7 @@ export class DrawMapComponent implements OnInit {
   map: any;
   searchGeocoder: string = ''
   ShowSearchBox = false
-  IsGeoLocationList = false
+
   GeoLocationListData: any;
   GlobalGeometry = []
   boudingCoordinates = [];
@@ -57,6 +57,9 @@ export class DrawMapComponent implements OnInit {
      this.searchTermsSubject()
     }
 
+    trackByFn(index,item){
+      return item.properties.place_id
+    }
 
     
   ActiveDistrictData
@@ -118,7 +121,7 @@ export class DrawMapComponent implements OnInit {
 
   searchTermsSubject(){
     this.searchGeocoderSubject.pipe(
-        debounceTime(500), // Ignore events within 300ms of the last event
+        debounceTime(300), // Ignore events within 300ms of the last event
         distinctUntilChanged(), // Ignore if the search term hasn't changed
         switchMap( ()=>{
           return this.GeoService.GetLocationData(this.searchGeocoder)
@@ -126,7 +129,6 @@ export class DrawMapComponent implements OnInit {
       ).subscribe(response=>{
         console.log(response)
           if (response.features.length > 0) {
-            this.IsGeoLocationList = true
             this.GeoLocationListData = response.features
           }
 
@@ -416,6 +418,17 @@ export class DrawMapComponent implements OnInit {
 
  
 
+  GeocodeLocationClick(data){
+    let latlng = data.geometry.coordinates
+    let bbox = data.bbox
+    this.mapHelperService.AddGeoDataMarker(this.map,latlng,bbox)
+  } 
 
+  CloseGeoCoderBox(){
+    this.ShowSearchBox = false
+    this.mapHelperService.RemoveTempMarker()
+    this.GeoLocationListData = null
+    this.searchGeocoder =''
+  }
 
 }

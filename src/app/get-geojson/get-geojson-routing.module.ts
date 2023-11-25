@@ -5,7 +5,7 @@ import { DummyComponent } from './dummy/dummy.component';
 
 const routes: Routes = [
   {
-    path:'get-geojson',
+    path:'',
     component:DrawMapComponent
   },
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path:"**",
-    redirectTo:"get-geojson"
+    redirectTo:""
   }
 ];
 
